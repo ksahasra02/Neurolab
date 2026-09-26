@@ -3,137 +3,139 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <!-- Makes the website responsive on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CogniLab | Cognitive Experiment Platform</title>
+    <title>CogniLab | Cognitive Research Platform</title>
 
-    <!-- Connect CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-    <header class="navbar">
+    <header class="nav">
 
-        <!-- Logo -->
-        <div class="logo">
-            <span class="logo-icon">🧠</span>
-            <span>CogniLab</span>
-        </div>
+        <a href="index.html" class="brand">
+            <span>🧠</span>
+            CogniLab
+        </a>
 
-        <!-- Navigation -->
         <nav>
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#demo">Demo</a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#workflow">
+                How it works
+            </a>
+
+            <a href="#demo">
+                Demo
+            </a>
+
         </nav>
 
-        <!-- Navbar button -->
-        <a href="login.html" class="nav-button">
-    Login
-</a>
+        <a
+            href="login.html"
+            class="nav-cta"
+        >
+            Try Demo
+        </a>
 
     </header>
 
 
-    <!-- ================= HERO SECTION ================= -->
-
     <main>
+
+        <!-- =========================
+             HERO
+        ========================== -->
 
         <section class="hero">
 
-            <!-- Left side of Hero -->
-            <div class="hero-content">
+            <div class="hero-copy">
 
-                <p class="small-heading">
+                <span class="eyebrow">
                     WEB-BASED COGNITIVE RESEARCH
-                </p>
+                </span>
 
                 <h1>
                     Build experiments.
                     <br>
-                    Measure behavior.
+
+                    <span>
+                        Measure behavior.
+                    </span>
+
                     <br>
-                    <span>Anywhere.</span>
+
+                    Anywhere.
                 </h1>
 
-                <p class="hero-description">
-                    Create and deploy cognitive experiments directly
-                    from your browser. Design trials, measure responses,
-                    and collect research data in one place.
+                <p>
+                    Create browser-based psychology and cognitive
+                    experiments, collect reaction-time and response
+                    data, and inspect results from one workspace.
                 </p>
 
-                <!-- Hero buttons -->
-                <div class="hero-buttons">
+                <div class="actions">
 
-                    <a href="login.html" class="primary-button">
-    Create Experiment
-</a>
+                    <a
+                        href="login.html"
+                        class="btn primary"
+                    >
+                        Start Building →
+                    </a>
 
-                    <a href="#demo" class="secondary-button">
-                        Try Demo →
+                    <a
+                        href="#workflow"
+                        class="btn ghost"
+                    >
+                        See how it works
                     </a>
 
                 </div>
 
-                <!-- Small trust/info text -->
-                <p class="hero-note">
-                    No specialized laboratory software required.
-                </p>
-
             </div>
 
 
-            <!-- Right side: Experiment Preview -->
+            <!-- Experiment Preview -->
 
-            <div class="experiment-preview">
+            <div class="hero-card">
 
-                <div class="preview-header">
+                <div class="mock-top">
 
-                    <div class="preview-title">
-                        <span class="status-dot"></span>
-                        Reaction Time Test
-                    </div>
+                    <span>
+                        CogniLab Experiment
+                    </span>
 
-                    <span class="trial-number">
-                        Trial 04 / 20
+                    <span class="live">
+                        ● LIVE
                     </span>
 
                 </div>
 
 
-                <div class="preview-body">
+                <div class="mock-body">
 
-                    <p class="ready-text">
-                        Respond when you see the stimulus
-                    </p>
+                    <small>
+                        REACTION TIME STUDY
+                    </small>
 
-                    <div class="stimulus">
-                        <div class="circle"></div>
-                    </div>
+                    <h3>
+                        Press SPACE when you see
+                        the circle
+                    </h3>
 
-                    <p class="instruction">
-                        Press <strong>SPACE</strong>
-                    </p>
+                    <div class="mock-circle"></div>
 
-                </div>
-
-
-                <div class="preview-footer">
-
-                    <div>
-                        <span>Reaction Time</span>
-                        <strong>384 ms</strong>
-                    </div>
-
-                    <div>
-                        <span>Accuracy</span>
-                        <strong>96%</strong>
-                    </div>
+                    <kbd>
+                        SPACE
+                    </kbd>
 
                 </div>
 
@@ -142,275 +144,291 @@
         </section>
 
 
-        <!-- ================= HOW IT WORKS ================= -->
+        <!-- =========================
+             WORKFLOW
+        ========================== -->
 
-        <section id="how-it-works" class="how-it-works">
+        <section
+            id="workflow"
+            class="section"
+        >
 
-            <div class="section-heading">
+            <span class="eyebrow">
+                WORKFLOW
+            </span>
 
-                <p class="small-heading">
-                    SIMPLE WORKFLOW
-                </p>
-
-                <h2>
-                    From idea to experiment
-                </h2>
-
-                <p>
-                    Build, deploy and analyze experiments without
-                    complicated laboratory software.
-                </p>
-
-            </div>
+            <h2>
+                From idea to data in four steps
+            </h2>
 
 
-            <div class="steps">
+            <div class="grid4">
 
-                <!-- Step 1 -->
-                <div class="step-card">
+                <article>
 
-                    <div class="step-number">
+                    <b>
                         01
-                    </div>
+                    </b>
 
                     <h3>
                         Design
                     </h3>
 
                     <p>
-                        Create your experiment using our visual
-                        experiment builder.
+                        Build trials visually without
+                        writing experiment logic from
+                        scratch.
                     </p>
 
-                </div>
+                </article>
 
 
-                <!-- Step 2 -->
-                <div class="step-card">
+                <article>
 
-                    <div class="step-number">
+                    <b>
                         02
-                    </div>
+                    </b>
 
                     <h3>
                         Configure
                     </h3>
 
                     <p>
-                        Add stimuli, trials, timing and response
-                        conditions.
+                        Set stimuli, timing, response
+                        keys, randomization and
+                        branching.
                     </p>
 
-                </div>
+                </article>
 
 
-                <!-- Step 3 -->
-                <div class="step-card">
+                <article>
 
-                    <div class="step-number">
+                    <b>
                         03
-                    </div>
+                    </b>
 
                     <h3>
                         Deploy
                     </h3>
 
                     <p>
-                        Publish your experiment and share it with
-                        participants.
+                        Publish a participant-facing
+                        experiment link.
                     </p>
 
-                </div>
+                </article>
 
 
-                <!-- Step 4 -->
-                <div class="step-card">
+                <article>
 
-                    <div class="step-number">
+                    <b>
                         04
-                    </div>
+                    </b>
 
                     <h3>
                         Analyze
                     </h3>
 
                     <p>
-                        Collect responses and examine experimental
-                        results.
+                        Inspect accuracy and reaction-time
+                        summaries and trial-level data.
                     </p>
 
-                </div>
+                </article>
 
             </div>
 
         </section>
 
 
-        <!-- ================= FEATURES ================= -->
+        <!-- =========================
+             FEATURES
+        ========================== -->
 
-        <section id="features" class="features">
+        <section
+            id="features"
+            class="section"
+        >
 
-            <div class="section-heading">
+            <span class="eyebrow">
+                FEATURES
+            </span>
 
-                <p class="small-heading">
-                    BUILT FOR RESEARCH
-                </p>
-
-                <h2>
-                    Everything you need to run experiments
-                </h2>
-
-            </div>
+            <h2>
+                Designed for behavioral experiments
+            </h2>
 
 
             <div class="feature-grid">
 
-                <div class="feature-card">
+                <article>
 
-                    <div class="feature-icon">
-                        ⏱️
-                    </div>
+                    <span>
+                        ⏱
+                    </span>
 
                     <h3>
-                        High-Resolution Timing
+                        High-resolution timing
                     </h3>
 
                     <p>
-                        Measure participant response times
-                        using browser-based high-resolution timing.
+                        Uses browser performance timing
+                        for reaction-time measurement.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="feature-card">
+                <article>
 
-                    <div class="feature-icon">
-                        🧩
-                    </div>
+                    <span>
+                        ▦
+                    </span>
 
                     <h3>
-                        Visual Experiment Builder
+                        Visual experiment builder
                     </h3>
 
                     <p>
-                        Build experiments using a simple visual
-                        interface instead of writing complex code.
+                        Create, edit, add and delete trials
+                        from a visual workspace.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="feature-card">
+                <article>
 
-                    <div class="feature-icon">
-                        🔀
-                    </div>
+                    <span>
+                        ⇄
+                    </span>
 
                     <h3>
-                        Randomized Trials
+                        Randomized trials
                     </h3>
 
                     <p>
-                        Randomize stimuli and trial sequences
-                        to support experimental design.
+                        Shuffle trial order and
+                        stimulus assignments.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="feature-card">
+                <article>
 
-                    <div class="feature-icon">
-                        🔒
-                    </div>
+                    <span>
+                        ◌
+                    </span>
 
                     <h3>
-                        Anonymous Data
+                        Anonymous data
                     </h3>
 
                     <p>
-                        Collect experimental responses while
-                        minimizing unnecessary participant information.
+                        Prototype participant data
+                        without requiring unnecessary
+                        identity fields.
                     </p>
 
-                </div>
+                </article>
+
+
+                <article>
+
+                    <span>
+                        ⑂
+                    </span>
+
+                    <h3>
+                        Conditional branching
+                    </h3>
+
+                    <p>
+                        Route participants based on
+                        correct or incorrect responses.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        ▥
+                    </span>
+
+                    <h3>
+                        Results dashboard
+                    </h3>
+
+                    <p>
+                        Review accuracy, average,
+                        fastest and slowest reaction times.
+                    </p>
+
+                </article>
 
             </div>
 
         </section>
 
 
-        <!-- ================= DEMO SECTION ================= -->
+        <!-- =========================
+             DEMO
+        ========================== -->
 
-        <section id="demo" class="demo">
+        <section
+            id="demo"
+            class="demo section"
+        >
 
-            <div class="demo-content">
+            <div>
 
-                <p class="small-heading">
-                    EXPERIENCE IT
-                </p>
+                <span class="eyebrow">
+                    INTERACTIVE DEMO
+                </span>
 
                 <h2>
-                    Run an experiment yourself.
+                    Build a study like a
+                    visual workflow.
                 </h2>
 
                 <p>
-                    See how a participant experiences a cognitive
-                    experiment directly in the browser.
+                    Use the prototype to create trials,
+                    preview them, publish a participant
+                    link, run the experiment and inspect
+                    results.
                 </p>
 
-                <a href="#" class="primary-button">
-                    Start Demo →
+                <a
+                    href="login.html"
+                    class="btn primary"
+                >
+                    Open Prototype →
                 </a>
 
             </div>
 
         </section>
 
-
-        <!-- ================= FINAL CTA ================= -->
-
-        <section class="final-cta">
-
-            <p class="small-heading">
-                READY TO START?
-            </p>
-
-            <h2>
-                Build your next experiment.
-            </h2>
-
-            <p>
-                Turn your research idea into an experiment
-                that participants can access from anywhere.
-            </p>
-
-            <a href="#" class="primary-button">
-                Create Experiment →
-            </a>
-
-        </section>
-
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
-        <div class="logo">
-            <span class="logo-icon">🧠</span>
-            <span>CogniLab</span>
-        </div>
+        <span>
+            © 2026 CogniLab
+        </span>
 
-        <p>
-            Web-based cognitive research platform.
-        </p>
-
-        <p class="copyright">
-            © 2026 CogniLab. Built for research.
-        </p>
+        <span>
+            Research Experiment Platform
+        </span>
 
     </footer>
 

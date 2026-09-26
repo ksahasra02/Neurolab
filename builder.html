@@ -2,34 +2,52 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Experiment Builder | CogniLab</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="builder.css">
+    <title>
+        Experiment Builder | CogniLab
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="builder.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- =====================================================
-         TOP NAVBAR
-         ===================================================== -->
 
-    <header class="builder-navbar">
+    <!-- =========================
+         TOP HEADER
+    ========================== -->
 
-        <div class="builder-brand">
+    <header class="builder-header">
 
-            <a href="dashboard.html" class="back-button">
+        <div class="header-left">
+
+            <a
+                href="dashboard.html"
+                class="back-button"
+            >
                 ←
             </a>
 
-            <div class="logo">
-                <span>🧠</span>
-                <strong>CogniLab</strong>
+
+            <div class="brand">
+                🧠 CogniLab
             </div>
 
-            <div class="divider"></div>
+
+            <div class="header-divider"></div>
+
 
             <span class="page-title">
                 Experiment Builder
@@ -38,199 +56,150 @@
         </div>
 
 
-        <div class="navbar-actions">
+        <div class="header-right">
 
-            <span class="save-status">
-                ● Saved
+            <span
+                id="saveStatus"
+                class="save-status"
+            >
+                Saved
             </span>
 
-            <a href="experiment.html" class="preview-button">
-    Preview
-</a>
 
-            <a href="publish.html" class="publish-button">
-    Publish
-</a>
+            <a
+                href="experiment.html"
+                class="preview-button"
+            >
+                Preview
+            </a>
+
+
+            <a
+                href="publish.html"
+                class="publish-button"
+            >
+                Publish
+            </a>
 
         </div>
 
     </header>
 
 
-    <!-- =====================================================
-         MAIN BUILDER
-         ===================================================== -->
+
+    <!-- =========================
+         BUILDER LAYOUT
+    ========================== -->
 
     <main class="builder-layout">
 
 
-        <!-- =================================================
-             LEFT SIDEBAR
-             ================================================= -->
+        <!-- =========================
+             LEFT: TRIAL SIDEBAR
+        ========================== -->
 
-        <aside class="builder-sidebar">
+        <aside class="trial-sidebar">
+
+
+            <!-- Experiment information -->
 
             <div class="experiment-info">
 
-                <p class="sidebar-label">
+                <span class="section-label">
                     EXPERIMENT
-                </p>
+                </span>
 
-                <h2>
+
+                <h1>
                     Reaction Time Study
-                </h2>
+                </h1>
+
 
                 <p>
-                    Draft · 20 trials
+                    Measure participant reaction time
+                    to visual stimuli.
                 </p>
 
             </div>
 
 
-            <!-- Builder navigation -->
 
-            <nav class="builder-nav">
+            <!-- Trial header -->
 
-                <a href="#" class="builder-nav-item active">
-                    <span>▦</span>
-                    Overview
-                </a>
+            <div class="trial-header">
 
-                <a href="#" class="builder-nav-item">
-                    <span>◫</span>
-                    Trials
-                </a>
+                <div>
 
-                <a href="#" class="builder-nav-item">
-                    <span>◉</span>
-                    Stimuli
-                </a>
-
-                <a href="#" class="builder-nav-item">
-                    <span>⚙</span>
-                    Settings
-                </a>
-
-            </nav>
-
-
-            <!-- Trial list -->
-
-            <div class="trial-section">
-
-                <div class="trial-heading">
-
-                    <span>
+                    <span class="section-label">
                         TRIALS
                     </span>
 
-                    <button>
-                        +
-                    </button>
+
+                    <span
+                        id="trialCount"
+                        class="trial-count"
+                    >
+                        0
+                    </span>
 
                 </div>
 
 
-                <div class="trial-list">
+                <button
+                    id="addTrialButton"
+                    class="add-trial-button"
+                    type="button"
+                >
+                    + Add Trial
+                </button>
 
-                    <div class="trial-item active">
-
-                        <span class="trial-number">
-                            01
-                        </span>
-
-                        <div>
-                            <strong>
-                                Welcome Screen
-                            </strong>
-
-                            <small>
-                                Instructions
-                            </small>
-                        </div>
-
-                    </div>
+            </div>
 
 
-                    <div class="trial-item">
 
-                        <span class="trial-number">
-                            02
-                        </span>
+            <!-- Trial list -->
 
-                        <div>
-                            <strong>
-                                Practice Trial
-                            </strong>
-
-                            <small>
-                                Response
-                            </small>
-                        </div>
-
-                    </div>
+            <div
+                id="trialList"
+                class="trial-list"
+            >
+            </div>
 
 
-                    <div class="trial-item">
 
-                        <span class="trial-number">
-                            03
-                        </span>
+            <!-- Randomization -->
 
-                        <div>
-                            <strong>
-                                Reaction Trial
-                            </strong>
+            <div class="sidebar-footer">
 
-                            <small>
-                                500 ms
-                            </small>
-                        </div>
+                <div class="randomization-box">
 
-                    </div>
+                    <span class="small-label">
+                        RANDOMIZATION
+                    </span>
 
 
-                    <div class="trial-item">
+                    <label class="checkbox-row">
 
-                        <span class="trial-number">
-                            04
-                        </span>
+                        <input
+                            type="checkbox"
+                            id="randomizeTrials"
+                        >
 
-                        <div>
-                            <strong>
-                                Reaction Trial
-                            </strong>
+                        Randomize trial order
 
-                            <small>
-                                500 ms
-                            </small>
-                        </div>
-
-                    </div>
+                    </label>
 
 
-                    <div class="trial-item">
+                    <label class="checkbox-row">
 
-                        <span class="trial-number">
-                            05
-                        </span>
+                        <input
+                            type="checkbox"
+                            id="randomizeStimulus"
+                        >
 
-                        <div>
-                            <strong>
-                                Reaction Trial
-                            </strong>
+                        Randomize stimulus
 
-                            <small>
-                                500 ms
-                            </small>
-                        </div>
-
-                    </div>
-
-
-                    <button class="add-trial-button">
-                        + Add Trial
-                    </button>
+                    </label>
 
                 </div>
 
@@ -239,99 +208,204 @@
         </aside>
 
 
-        <!-- =================================================
-             CENTER CANVAS
-             ================================================= -->
 
-        <section class="builder-canvas">
+        <!-- =========================
+             CENTER: PREVIEW
+        ========================== -->
 
-            <div class="canvas-header">
+        <section class="preview-area">
+
+
+            <!-- Preview heading -->
+
+            <div class="preview-top">
 
                 <div>
 
-                    <p class="small-heading">
-                        TRIAL 01
-                    </p>
+                    <span class="section-label">
+                        PARTICIPANT PREVIEW
+                    </span>
 
-                    <h1>
-                        Welcome Screen
-                    </h1>
+
+                    <h2>
+                        Live Experiment Preview
+                    </h2>
 
                 </div>
 
-                <span class="trial-type">
-                    Instruction
+
+                <span class="preview-badge">
+                    LIVE
                 </span>
 
             </div>
 
 
-            <!-- Canvas -->
 
-            <div class="experiment-canvas">
+            <!-- Participant window -->
 
-                <div class="canvas-label">
-                    PARTICIPANT PREVIEW
+            <div class="participant-window">
+
+
+                <!-- Participant header -->
+
+                <div class="participant-header">
+
+                    <span>
+                        CogniLab
+                    </span>
+
+
+                    <span id="previewProgress">
+                        Trial 01
+                    </span>
+
                 </div>
 
-                <div class="participant-screen">
 
-                    <p class="instruction-small">
-                        WELCOME
+
+                <!-- Participant content -->
+
+                <div class="participant-content">
+
+                    <span class="preview-label">
+                        REACTION TIME STUDY
+                    </span>
+
+
+                    <h1 id="previewTitle">
+                        Trial
+                    </h1>
+
+
+                    <p id="previewDescription">
                     </p>
 
-                    <h2>
-                        Reaction Time Experiment
-                    </h2>
 
-                    <p>
-                        You will see a series of colored shapes.
-                        Respond as quickly and accurately as possible.
-                    </p>
+                    <div
+                        id="builderStimulus"
+                        class="preview-stimulus circle"
+                    >
+                    </div>
 
-                    <button class="start-demo-button">
-                        Continue →
+
+                    <div class="preview-key">
+
+                        Press
+
+                        <strong id="previewKey">
+                            SPACE
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="demoButton"
+                        class="demo-button"
+                        type="button"
+                    >
+                        Run Trial
                     </button>
+
+                </div>
+
+
+
+                <!-- Participant footer -->
+
+                <div class="participant-footer">
+
+                    <span>
+                        Responses are recorded anonymously.
+                    </span>
+
+
+                    <span>
+                        CogniLab Research Platform
+                    </span>
 
                 </div>
 
             </div>
 
 
-            <!-- Bottom timeline -->
+
+            <!-- =========================
+                 TIMELINE
+            ========================== -->
 
             <div class="timeline">
 
-                <div class="timeline-item active">
-                    <span class="timeline-number">01</span>
-                    Instructions
-                </div>
-
-                <div class="timeline-arrow">
-                    →
-                </div>
 
                 <div class="timeline-item">
-                    <span class="timeline-number">02</span>
-                    Fixation
+
+                    <span
+                        class="timeline-dot active"
+                    >
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Trial Start
+                        </strong>
+
+                        <span>
+                            Participant begins trial
+                        </span>
+
+                    </div>
+
                 </div>
 
-                <div class="timeline-arrow">
-                    →
-                </div>
+
+                <div class="timeline-line"></div>
+
 
                 <div class="timeline-item">
-                    <span class="timeline-number">03</span>
-                    Stimulus
+
+                    <span class="timeline-dot">
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Stimulus
+                        </strong>
+
+                        <span id="timelineStimulus">
+                            Visual stimulus
+                        </span>
+
+                    </div>
+
                 </div>
 
-                <div class="timeline-arrow">
-                    →
-                </div>
+
+                <div class="timeline-line"></div>
+
 
                 <div class="timeline-item">
-                    <span class="timeline-number">04</span>
-                    Response
+
+                    <span class="timeline-dot">
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Response
+                        </strong>
+
+                        <span id="timelineResponse">
+                            Participant response
+                        </span>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -339,298 +413,307 @@
         </section>
 
 
-        <!-- =================================================
-             RIGHT SETTINGS PANEL
-             ================================================= -->
+
+        <!-- =========================
+             RIGHT: SETTINGS
+        ========================== -->
 
         <aside class="settings-panel">
 
+
+            <!-- Settings header -->
+
             <div class="settings-header">
 
-                <h2>
-                    Trial Settings
-                </h2>
+                <div>
 
-                <span>
-                    01
-                </span>
-
-            </div>
+                    <span class="section-label">
+                        SETTINGS
+                    </span>
 
 
-            <!-- General -->
-
-            <div class="settings-section">
-
-                <p class="settings-label">
-                    GENERAL
-                </p>
+                    <h2>
+                        Trial Settings
+                    </h2>
 
 
-                <div class="form-group">
-
-                    <label>
-                        Trial name
-                    </label>
-
-                    <input
-                        type="text"
-                        value="Welcome Screen"
-                    >
+                    <span id="settingsTrialNumber">
+                        01
+                    </span>
 
                 </div>
 
 
-                <div class="form-group">
+                <button
+                    id="deleteTrialButton"
+                    class="delete-trial-button"
+                    type="button"
+                >
+                    Delete Trial
+                </button>
 
-                    <label>
-                        Trial type
-                    </label>
+            </div>
 
-                    <select>
 
-                        <option>
+
+            <!-- =========================
+                 GENERAL
+            ========================== -->
+
+            <div class="settings-section">
+
+                <h3>
+                    General
+                </h3>
+
+
+                <label>
+
+                    Trial Name
+
+                    <input
+                        id="trialName"
+                        type="text"
+                        placeholder="Enter trial name"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Trial Type
+
+                    <select id="trialType">
+
+                        <option value="reaction">
+                            Reaction Time
+                        </option>
+
+                        <option value="choice">
+                            Choice Response
+                        </option>
+
+                        <option value="instruction">
                             Instruction
                         </option>
 
-                        <option>
-                            Stimulus
+                    </select>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- =========================
+                 STIMULUS
+            ========================== -->
+
+            <div class="settings-section">
+
+                <h3>
+                    Stimulus
+                </h3>
+
+
+                <label>
+
+                    Stimulus Type
+
+                    <select id="stimulusType">
+
+                        <option value="circle">
+                            Circle
                         </option>
 
-                        <option>
-                            Response
-                        </option>
-
-                        <option>
-                            Feedback
+                        <option value="square">
+                            Square
                         </option>
 
                     </select>
 
-                </div>
+                </label>
+
+
+                <label>
+
+                    Description
+
+                    <textarea
+                        id="stimulusDescription"
+                        rows="3"
+                        placeholder="Describe what the participant should do..."
+                    ></textarea>
+
+                </label>
 
             </div>
 
 
-            <!-- Stimulus -->
+
+            <!-- =========================
+                 TIMING
+            ========================== -->
 
             <div class="settings-section">
 
-                <p class="settings-label">
-                    STIMULUS
-                </p>
+                <h3>
+                    Timing
+                </h3>
 
 
-                <div class="form-group">
+                <label>
 
-                    <label>
-                        Stimulus type
-                    </label>
+                    Delay Before Stimulus
 
-                    <select>
-
-                        <option>
-                            Text
-                        </option>
-
-                        <option>
-                            Image
-                        </option>
-
-                        <option>
-                            Shape
-                        </option>
-
-                        <option>
-                            Video
-                        </option>
-
-                    </select>
-
-                </div>
+                    <span class="unit">
+                        ms
+                    </span>
 
 
-                <div class="form-group">
+                    <input
+                        id="delay"
+                        type="number"
+                        min="0"
+                        step="100"
+                    >
 
-                    <label>
-                        Text content
-                    </label>
+                </label>
 
-                    <textarea>Reaction Time Experiment</textarea>
 
-                </div>
+                <label>
+
+                    Stimulus Duration
+
+                    <span class="unit">
+                        ms
+                    </span>
+
+
+                    <input
+                        id="duration"
+                        type="number"
+                        min="0"
+                        step="100"
+                    >
+
+                </label>
 
             </div>
 
 
-            <!-- Timing -->
+
+            <!-- =========================
+                 RESPONSE
+            ========================== -->
 
             <div class="settings-section">
 
-                <p class="settings-label">
-                    TIMING
-                </p>
+                <h3>
+                    Response
+                </h3>
 
 
-                <div class="timing-row">
+                <label>
 
-                    <div class="form-group">
+                    Response Method
 
-                        <label>
-                            Duration
-                        </label>
+                    <select id="responseMethod">
 
-                        <div class="input-unit">
-
-                            <input
-                                type="number"
-                                value="500"
-                            >
-
-                            <span>
-                                ms
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Delay
-                        </label>
-
-                        <div class="input-unit">
-
-                            <input
-                                type="number"
-                                value="1000"
-                            >
-
-                            <span>
-                                ms
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Response -->
-
-            <div class="settings-section">
-
-                <p class="settings-label">
-                    RESPONSE
-                </p>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Response method
-                    </label>
-
-                    <select>
-
-                        <option>
+                        <option value="keyboard">
                             Keyboard
                         </option>
 
-                        <option>
+                        <option value="mouse">
                             Mouse Click
-                        </option>
-
-                        <option>
-                            Touch
-                        </option>
-
-                        <option>
-                            No Response
                         </option>
 
                     </select>
 
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Allowed key
-                    </label>
-
-                    <input
-                        type="text"
-                        value="SPACE"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- Randomization -->
-
-            <div class="settings-section">
-
-                <p class="settings-label">
-                    RANDOMIZATION
-                </p>
-
-
-                <label class="toggle-row">
-
-                    <span>
-                        Randomize trial order
-                    </span>
-
-                    <input
-                        type="checkbox"
-                        checked
-                    >
-
                 </label>
 
 
-                <label class="toggle-row">
+                <label>
 
-                    <span>
-                        Randomize stimulus
-                    </span>
+                    Correct Key
 
-                    <input
-                        type="checkbox"
-                    >
+                    <select id="allowedKey">
+
+                        <option value="Space">
+                            SPACE
+                        </option>
+
+                        <option value="Enter">
+                            ENTER
+                        </option>
+
+                        <option value="ArrowLeft">
+                            LEFT ARROW
+                        </option>
+
+                        <option value="ArrowRight">
+                            RIGHT ARROW
+                        </option>
+
+                    </select>
 
                 </label>
 
             </div>
 
 
-            <!-- Branching -->
+
+            <!-- =========================
+                 CONDITIONAL BRANCHING
+            ========================== -->
 
             <div class="settings-section">
 
-                <p class="settings-label">
-                    CONDITIONAL BRANCHING
+                <h3>
+                    Conditional Branching
+                </h3>
+
+
+                <p class="settings-help">
+                    After this trial, choose where the
+                    participant goes for a correct or
+                    incorrect response.
                 </p>
 
-                <button class="branch-button">
-                    + Add Condition
-                </button>
+
+                <label>
+
+                    After Correct
+
+                    <select id="correctNext">
+                    </select>
+
+                </label>
+
+
+                <label>
+
+                    After Incorrect
+
+                    <select id="incorrectNext">
+                    </select>
+
+                </label>
 
             </div>
 
         </aside>
 
     </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="builder.js"></script>
 
 </body>
 

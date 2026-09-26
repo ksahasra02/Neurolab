@@ -2,141 +2,163 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reaction Time Study | CogniLab</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="experiment.css">
+    <title>
+        Participant Experiment | CogniLab
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="experiment.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- =====================================================
-         EXPERIMENT HEADER
-         ===================================================== -->
+    <div class="experiment-shell">
 
-    <header class="experiment-header">
 
-        <div class="experiment-brand">
+        <!-- =========================
+             TOP BAR
+        ========================== -->
 
-            <span class="brand-icon">
-                🧠
-            </span>
+        <div class="topbar">
 
             <span>
-                CogniLab
+                🧠 CogniLab
+            </span>
+
+
+            <span class="progress-area">
+
+                <span>
+                    Trial 01 / 05
+                </span>
+
             </span>
 
         </div>
 
 
-        <div class="progress-area">
 
-            <span>
-                Trial 04 / 20
-            </span>
-
-            <div class="progress-bar">
-
-                <div class="progress-fill"></div>
-
-            </div>
-
-        </div>
-
-
-        <button class="exit-button">
-            Exit
-        </button>
-
-    </header>
-
-
-    <!-- =====================================================
-         MAIN EXPERIMENT AREA
-         ===================================================== -->
-
-    <main class="experiment-area">
-
-
-        <!-- =================================================
+        <!-- =========================
              INSTRUCTION SCREEN
-             ================================================= -->
+        ========================== -->
 
-        <section class="experiment-screen instruction-screen active">
+        <section
+            class="experiment-screen instruction-screen active"
+        >
 
-            <div class="screen-content">
-
-                <p class="experiment-label">
-                    REACTION TIME STUDY
-                </p>
-
-                <h1>
-                    Ready?
-                </h1>
-
-                <p>
-                    A shape will appear on the screen.
-                    <br>
-                    Press <strong>SPACE</strong> as quickly as
-                    possible when you see it.
-                </p>
+            <span class="eyebrow">
+                REACTION TIME STUDY
+            </span>
 
 
-                <div class="keyboard-key">
-                    SPACE
-                </div>
+            <h1>
+                Ready to begin?
+            </h1>
 
 
-                <button class="begin-button">
-                    Begin Experiment →
-                </button>
+            <p>
+                You will see visual stimuli.
+                Respond as quickly and accurately
+                as possible.
+            </p>
 
-            </div>
+
+            <button
+                class="begin-button"
+                type="button"
+            >
+                Begin Experiment →
+            </button>
 
         </section>
 
 
-        <!-- =================================================
-             FIXATION SCREEN
-             ================================================= -->
 
-        <section class="experiment-screen fixation-screen">
+        <!-- =========================
+             FIXATION SCREEN
+        ========================== -->
+
+        <section
+            class="experiment-screen fixation-screen"
+        >
 
             <div class="fixation">
                 +
             </div>
 
+
+            <p>
+                Get ready...
+            </p>
+
         </section>
 
 
-        <!-- =================================================
+
+        <!-- =========================
              STIMULUS SCREEN
-             ================================================= -->
+        ========================== -->
 
-        <section class="experiment-screen stimulus-screen">
+        <section
+            class="experiment-screen stimulus-screen"
+        >
 
-            <div class="stimulus-circle"></div>
+            <span class="eyebrow">
+                RESPOND NOW
+            </span>
+
+
+            <div id="stimulus">
+            </div>
+
+
+            <p>
+                Respond as quickly as possible.
+            </p>
 
         </section>
 
 
-        <!-- =================================================
-             RESPONSE SCREEN
-             ================================================= -->
 
-        <section class="experiment-screen response-screen">
+        <!-- =========================
+             RESPONSE SCREEN
+        ========================== -->
+
+        <section
+            class="experiment-screen response-screen"
+        >
 
             <div class="response-content">
 
-                <p class="response-label">
-                    RESPONSE RECORDED
-                </p>
+                <span class="eyebrow">
+                    REACTION TIME
+                </span>
+
 
                 <h1>
-                    384 <span>ms</span>
+                    0
+                    <span>
+                        ms
+                    </span>
                 </h1>
+
+
+                <p>
+                    Your response has been recorded.
+                </p>
+
 
                 <p>
                     Press SPACE to continue
@@ -147,55 +169,48 @@
         </section>
 
 
-        <!-- =================================================
+
+        <!-- =========================
              COMPLETION SCREEN
-             ================================================= -->
+        ========================== -->
 
-        <section class="experiment-screen completion-screen">
+        <section
+            class="experiment-screen completion-screen"
+        >
 
-            <div class="completion-content">
+            <span class="eyebrow">
+                COMPLETE
+            </span>
 
-                <div class="completion-icon">
-                    ✓
-                </div>
 
-                <p class="experiment-label">
-                    EXPERIMENT COMPLETE
-                </p>
+            <h1>
+                Experiment complete
+            </h1>
 
-                <h1>
-                    Thank you!
-                </h1>
 
-                <p>
-                    Your responses have been recorded.
-                    <br>
-                    You may now close this window.
-                </p>
+            <p>
+                Thank you for participating.
+            </p>
 
-            </div>
+
+            <a
+                href="results.html"
+                class="results-button"
+            >
+                View Demo Results →
+            </a>
 
         </section>
 
-    </main>
+    </div>
 
 
-    <!-- =====================================================
-         FOOTER / PRIVACY
-         ===================================================== -->
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
-    <footer class="experiment-footer">
-
-        <span>
-            Your responses are recorded anonymously.
-        </span>
-
-        <span>
-            CogniLab Research Platform
-        </span>
-
-    </footer>
+    <script src="experiment.js"></script>
 
 </body>
-<script src="experiment.js"></script>
+
 </html>

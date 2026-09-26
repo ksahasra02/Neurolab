@@ -5,498 +5,363 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard | CogniLab</title>
+    <title>CogniLab | Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
 
-    <!-- ================= SIDEBAR ================= -->
+    <!-- =========================
+         PAGE WRAPPER
+    ========================== -->
 
-    <aside class="sidebar">
-
-        <!-- Logo -->
-
-        <div class="logo">
-            <span>🧠</span>
-            <strong>CogniLab</strong>
-        </div>
+    <div class="dashboard-layout">
 
 
-        <!-- Navigation -->
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
 
-        <nav class="sidebar-nav">
+        <aside class="sidebar">
 
-            <a href="#" class="nav-item active">
-                <span>▦</span>
-                Dashboard
-            </a>
+            <!-- Logo -->
 
-            <a href="#" class="nav-item">
-                <span>◫</span>
-                My Experiments
-            </a>
-
-            <a href="#" class="nav-item">
-                <span>◈</span>
-                Results
-            </a>
-
-            <a href="#" class="nav-item">
-                <span>⚙</span>
-                Settings
-            </a>
-
-        </nav>
+            <div class="sidebar-brand">
+                <a href="index.html" class="brand">
+                    <span class="brand-icon">🧠</span>
+                    <span>CogniLab</span>
+                </a>
+            </div>
 
 
-        <!-- Bottom sidebar -->
+            <!-- Researcher -->
 
-        <div class="sidebar-bottom">
-
-            <div class="user-mini">
+            <div class="researcher-card">
 
                 <div class="avatar">
                     R
                 </div>
 
-                <div>
+                <div class="researcher-info">
                     <strong>Researcher</strong>
-                    <span>researcher@example.com</span>
+                    <span>Demo workspace</span>
                 </div>
 
             </div>
 
-            <a href="index.html" class="logout">
-                Log out
-            </a>
 
-        </div>
+            <!-- Navigation -->
 
-    </aside>
+            <nav class="sidebar-nav">
 
+                <p class="nav-label">WORKSPACE</p>
 
-    <!-- ================= MAIN CONTENT ================= -->
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
 
-    <main class="dashboard">
+                <a href="builder.html" class="nav-item">
+                    <span class="nav-icon">✎</span>
+                    <span>My Experiments</span>
+                </a>
 
-        <!-- Top bar -->
+                <a href="results.html" class="nav-item">
+                    <span class="nav-icon">◉</span>
+                    <span>Results</span>
+                </a>
 
-        <header class="topbar">
+                <a href="publish.html" class="nav-item">
+                    <span class="nav-icon">↗</span>
+                    <span>Publish</span>
+                </a>
 
-            <div>
-                <p class="small-heading">
-                    RESEARCH WORKSPACE
-                </p>
-
-                <h1>
-                    Good morning, Researcher
-                </h1>
-
-                <p class="subtitle">
-                    Manage your experiments and research data.
-                </p>
-            </div>
+            </nav>
 
 
-            <a href="builder.html" class="create-button">
-                + Create Experiment
-            </a>
+            <!-- Sidebar bottom -->
 
-        </header>
+            <div class="sidebar-bottom">
 
+                <a href="index.html" class="sidebar-link">
+                    ← Back to Home
+                </a>
 
-        <!-- ================= STATISTICS ================= -->
-
-        <section class="stats-grid">
-
-            <!-- Stat 1 -->
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span>Experiments</span>
-
-                    <div class="stat-icon">
-                        ◫
-                    </div>
+                <div class="sidebar-version">
+                    CogniLab Prototype · 2026
                 </div>
 
-                <strong>12</strong>
-
-                <p>
-                    <span class="positive">+2</span>
-                    this month
-                </p>
-
             </div>
 
+        </aside>
 
-            <!-- Stat 2 -->
 
-            <div class="stat-card">
 
-                <div class="stat-top">
-                    <span>Published</span>
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
 
-                    <div class="stat-icon">
-                        ✓
-                    </div>
+        <main class="main-content">
+
+
+            <!-- =========================
+                 TOP BAR
+            ========================== -->
+
+            <header class="topbar">
+
+                <div class="mobile-brand">
+                    <a href="index.html" class="brand">
+                        <span>🧠</span>
+                        CogniLab
+                    </a>
                 </div>
 
-                <strong>8</strong>
+                <div class="topbar-actions">
 
-                <p>
-                    <span class="positive">67%</span>
-                    of experiments
-                </p>
-
-            </div>
-
-
-            <!-- Stat 3 -->
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span>Participants</span>
-
-                    <div class="stat-icon">
-                        ◎
-                    </div>
-                </div>
-
-                <strong>1,284</strong>
-
-                <p>
-                    <span class="positive">+18%</span>
-                    this month
-                </p>
-
-            </div>
-
-
-            <!-- Stat 4 -->
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span>Responses</span>
-
-                    <div class="stat-icon">
-                        ≋
-                    </div>
-                </div>
-
-                <strong>8,492</strong>
-
-                <p>
-                    <span class="positive">+24%</span>
-                    this month
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CONTENT GRID ================= -->
-
-        <section class="content-grid">
-
-
-            <!-- ================= RECENT EXPERIMENTS ================= -->
-
-            <div class="experiments-panel">
-
-                <div class="panel-header">
-
-                    <div>
-                        <h2>
-                            Recent Experiments
-                        </h2>
-
-                        <p>
-                            Your latest research experiments
-                        </p>
-                    </div>
-
-                    <a href="#" class="view-all">
-                        View all →
+                    <a href="builder.html" class="topbar-button">
+                        + Create Experiment
                     </a>
 
                 </div>
 
+            </header>
 
-                <!-- Experiment 1 -->
 
-                <div class="experiment-row">
 
-                    <div class="experiment-info">
+            <!-- =========================
+                 PAGE HEADER
+            ========================== -->
 
-                        <div class="experiment-icon">
-                            RT
-                        </div>
+            <section class="page-header">
 
-                        <div>
+                <div>
 
-                            <h3>
-                                Reaction Time Study
-                            </h3>
+                    <span class="eyebrow">
+                        RESEARCH WORKSPACE
+                    </span>
 
-                            <p>
-                                20 trials · Updated 2 hours ago
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="experiment-status published">
-                        Published
-                    </div>
-
-
-                    <div class="participant-count">
-                        342 participants
-                    </div>
-
-
-                    <button class="more-button">
-                        ⋮
-                    </button>
-
-                </div>
-
-
-                <!-- Experiment 2 -->
-
-                <div class="experiment-row">
-
-                    <div class="experiment-info">
-
-                        <div class="experiment-icon purple">
-                            VS
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Visual Search Experiment
-                            </h3>
-
-                            <p>
-                                35 trials · Updated yesterday
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="experiment-status published">
-                        Published
-                    </div>
-
-
-                    <div class="participant-count">
-                        218 participants
-                    </div>
-
-
-                    <button class="more-button">
-                        ⋮
-                    </button>
-
-                </div>
-
-
-                <!-- Experiment 3 -->
-
-                <div class="experiment-row">
-
-                    <div class="experiment-info">
-
-                        <div class="experiment-icon orange">
-                            ST
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Stroop Task
-                            </h3>
-
-                            <p>
-                                50 trials · Updated 3 days ago
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="experiment-status draft">
-                        Draft
-                    </div>
-
-
-                    <div class="participant-count">
-                        —
-                    </div>
-
-
-                    <button class="more-button">
-                        ⋮
-                    </button>
-
-                </div>
-
-
-                <!-- Experiment 4 -->
-
-                <div class="experiment-row">
-
-                    <div class="experiment-info">
-
-                        <div class="experiment-icon green">
-                            WM
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Working Memory Test
-                            </h3>
-
-                            <p>
-                                25 trials · Updated 5 days ago
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="experiment-status published">
-                        Published
-                    </div>
-
-
-                    <div class="participant-count">
-                        156 participants
-                    </div>
-
-
-                    <button class="more-button">
-                        ⋮
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- ================= RIGHT PANEL ================= -->
-
-            <div class="right-panel">
-
-
-                <!-- Quick Start -->
-
-                <div class="quick-card">
-
-                    <p class="small-heading">
-                        QUICK START
-                    </p>
-
-                    <h2>
-                        Create a new experiment
-                    </h2>
+                    <h1>
+                        Good morning, Researcher
+                    </h1>
 
                     <p>
-                        Start with a blank experiment and
-                        configure your first trial.
+                        Design, run and analyze your cognitive experiments.
                     </p>
-
-                    <a href="builder.html" class="quick-button">
-                        Start Building →
-                    </a>
 
                 </div>
 
+                <a href="builder.html" class="primary-button">
+                    Create Experiment
+                    <span>→</span>
+                </a>
 
-                <!-- Activity -->
+            </section>
 
-                <div class="activity-card">
+
+
+            <!-- =========================
+                 STATISTICS
+            ========================== -->
+
+            <section class="stats-grid">
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ◫
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+                            EXPERIMENTS
+                        </span>
+
+                        <strong id="experimentCount">
+                            1
+                        </strong>
+
+                        <small>
+                            Your current studies
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ▦
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+                            TRIALS
+                        </span>
+
+                        <strong id="trialCount">
+                            5
+                        </strong>
+
+                        <small>
+                            Configured trials
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon green">
+                        ◉
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+                            RESPONSES
+                        </span>
+
+                        <strong id="responseCount">
+                            5
+                        </strong>
+
+                        <small>
+                            Recorded responses
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ⏱
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+                            AVG. RT
+                        </span>
+
+                        <strong id="averageRT">
+                            1158 ms
+                        </strong>
+
+                        <small>
+                            Average reaction time
+                        </small>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+
+            <!-- =========================
+                 CONTENT GRID
+            ========================== -->
+
+            <section class="content-grid">
+
+
+                <!-- =========================
+                     RECENT EXPERIMENT
+                ========================== -->
+
+                <div class="panel recent-panel">
 
                     <div class="panel-header">
 
                         <div>
+
+                            <span class="eyebrow">
+                                YOUR WORK
+                            </span>
+
                             <h2>
-                                Recent Activity
+                                Recent experiment
                             </h2>
+
                         </div>
+
+                        <a href="builder.html" class="text-link">
+                            Open builder →
+                        </a>
 
                     </div>
 
 
-                    <div class="activity-item">
 
-                        <div class="activity-dot"></div>
+                    <div class="experiment-card">
 
-                        <div>
+                        <div class="experiment-card-top">
 
-                            <p>
-                                <strong>Reaction Time Study</strong>
-                                received 12 new responses.
-                            </p>
+                            <div class="experiment-symbol">
+                                RT
+                            </div>
 
-                            <span>
-                                18 minutes ago
+                            <span class="status-badge">
+                                Draft
                             </span>
 
                         </div>
 
-                    </div>
+
+                        <h3 id="recentExperimentName">
+                            Reaction Time Study
+                        </h3>
+
+                        <p id="recentExperimentDescription">
+                            Browser reaction-time experiment
+                        </p>
 
 
-                    <div class="activity-item">
+                        <div class="experiment-meta">
 
-                        <div class="activity-dot purple-dot"></div>
+                            <div>
+                                <span>Trials</span>
+                                <strong id="recentTrialCount">5</strong>
+                            </div>
 
-                        <div>
+                            <div>
+                                <span>Responses</span>
+                                <strong id="recentResponseCount">5</strong>
+                            </div>
 
-                            <p>
-                                <strong>Visual Search Experiment</strong>
-                                was published.
-                            </p>
-
-                            <span>
-                                Yesterday
-                            </span>
+                            <div>
+                                <span>Status</span>
+                                <strong id="recentStatus">Draft</strong>
+                            </div>
 
                         </div>
 
-                    </div>
 
+                        <div class="experiment-actions">
 
-                    <div class="activity-item">
+                            <a href="builder.html" class="secondary-button">
+                                Configure
+                            </a>
 
-                        <div class="activity-dot orange-dot"></div>
-
-                        <div>
-
-                            <p>
-                                <strong>Stroop Task</strong>
-                                was edited.
-                            </p>
-
-                            <span>
-                                3 days ago
-                            </span>
+                            <a href="experiment.html" class="primary-small-button">
+                                Run Preview →
+                            </a>
 
                         </div>
 
@@ -504,11 +369,324 @@
 
                 </div>
 
-            </div>
 
-        </section>
 
-    </main>
+                <!-- =========================
+                     QUICK START
+                ========================== -->
+
+                <div class="panel quick-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                GET STARTED
+                            </span>
+
+                            <h2>
+                                Quick start
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-list">
+
+
+                        <a href="builder.html" class="quick-item">
+
+                            <div class="quick-number">
+                                01
+                            </div>
+
+                            <div class="quick-text">
+
+                                <strong>
+                                    Create your first experiment
+                                </strong>
+
+                                <span>
+                                    Configure trials and timing
+                                </span>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+
+                        <a href="experiment.html" class="quick-item">
+
+                            <div class="quick-number">
+                                02
+                            </div>
+
+                            <div class="quick-text">
+
+                                <strong>
+                                    Run participant preview
+                                </strong>
+
+                                <span>
+                                    Test the current experiment
+                                </span>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+
+                        <a href="results.html" class="quick-item">
+
+                            <div class="quick-number">
+                                03
+                            </div>
+
+                            <div class="quick-text">
+
+                                <strong>
+                                    Inspect results
+                                </strong>
+
+                                <span>
+                                    View the latest local results
+                                </span>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+
+                        <a href="publish.html" class="quick-item">
+
+                            <div class="quick-number">
+                                04
+                            </div>
+
+                            <div class="quick-text">
+
+                                <strong>
+                                    Publish experiment
+                                </strong>
+
+                                <span>
+                                    Create a participant link
+                                </span>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 INFORMATION BANNER
+            ========================== -->
+
+            <section class="info-banner">
+
+                <div class="info-icon">
+                    i
+                </div>
+
+                <div>
+
+                    <strong>
+                        Prototype workspace
+                    </strong>
+
+                    <p>
+                        This frontend prototype currently stores experiment
+                        data in your browser. Supabase database storage will
+                        be connected during the backend integration phase.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================
+         DASHBOARD SCRIPT
+    ========================== -->
+
+    <script>
+
+        /*
+         * Current prototype dashboard.
+         *
+         * This section reads the existing localStorage
+         * data created by the frontend prototype.
+         *
+         * Later, this will be replaced with Supabase
+         * database queries.
+         */
+
+
+        const experimentKey = "cognilabExperiment";
+        const resultsKey = "experimentResults";
+
+
+        const experiment =
+            JSON.parse(
+                localStorage.getItem(experimentKey)
+            );
+
+
+        const results =
+            JSON.parse(
+                localStorage.getItem(resultsKey)
+            );
+
+
+        /*
+         * Experiment statistics
+         */
+
+        if (experiment) {
+
+            const trials =
+                Array.isArray(experiment.trials)
+                    ? experiment.trials
+                    : [];
+
+
+            document.getElementById(
+                "experimentCount"
+            ).textContent = "1";
+
+
+            document.getElementById(
+                "trialCount"
+            ).textContent = trials.length;
+
+
+            document.getElementById(
+                "recentExperimentName"
+            ).textContent =
+                experiment.name ||
+                "Untitled Experiment";
+
+
+            document.getElementById(
+                "recentExperimentDescription"
+            ).textContent =
+                experiment.description ||
+                "Browser cognitive experiment";
+
+
+            document.getElementById(
+                "recentTrialCount"
+            ).textContent =
+                trials.length;
+
+        }
+
+
+
+        /*
+         * Result statistics
+         */
+
+        if (
+            results &&
+            Array.isArray(results.results)
+        ) {
+
+            const rows =
+                results.results;
+
+
+            const responseCount =
+                rows.length;
+
+
+            const validReactionTimes =
+                rows
+                    .map(
+                        item =>
+                            Number(item.reactionTime)
+                    )
+                    .filter(
+                        value =>
+                            Number.isFinite(value)
+                    );
+
+
+            let average =
+                null;
+
+
+            if (validReactionTimes.length > 0) {
+
+                average =
+                    validReactionTimes.reduce(
+                        (sum, value) =>
+                            sum + value,
+                        0
+                    )
+                    /
+                    validReactionTimes.length;
+
+            }
+
+
+            document.getElementById(
+                "responseCount"
+            ).textContent =
+                responseCount;
+
+
+            document.getElementById(
+                "recentResponseCount"
+            ).textContent =
+                responseCount;
+
+
+            document.getElementById(
+                "averageRT"
+            ).textContent =
+                average === null
+                    ? "—"
+                    : Math.round(average) + " ms";
+
+        }
+
+    </script>
 
 </body>
 
