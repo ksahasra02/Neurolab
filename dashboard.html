@@ -1,693 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CogniLab | Dashboard</title>
+    <title>Dashboard — CogniLab</title>
 
     <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         PAGE WRAPPER
-    ========================== -->
+<div class="dashboard">
 
-    <div class="dashboard-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            CogniLab
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item active">
+                Dashboard
+            </a>
+
+            <a href="builder.html" class="nav-item">
+                Builder
+            </a>
+
+            <a href="results.html" class="nav-item">
+                Results
+            </a>
+
+            <a href="publish.html" class="nav-item">
+                Publish
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
 
 
-        <!-- =========================
-             SIDEBAR
-        ========================== -->
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
 
-        <aside class="sidebar">
+        <!-- HEADER -->
+        <header class="dashboard-header">
 
-            <!-- Logo -->
+            <div>
+                <p class="eyebrow">RESEARCHER DASHBOARD</p>
 
-            <div class="sidebar-brand">
-                <a href="index.html" class="brand">
-                    <span class="brand-icon">🧠</span>
-                    <span>CogniLab</span>
-                </a>
+                <h1>Welcome to CogniLab</h1>
+
+                <p class="header-description">
+                    Create, manage, and analyze your psychology experiments.
+                </p>
+            </div>
+
+            <a href="builder.html" class="primary-button">
+                + New Experiment
+            </a>
+
+        </header>
+
+
+        <!-- USER -->
+        <div class="user-bar">
+            <span>Signed in as</span>
+            <strong id="userEmail">Loading...</strong>
+        </div>
+
+
+        <!-- STATS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Experiments
+                </div>
+
+                <div class="stat-value" id="experimentCount">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Total experiments
+                </div>
+
             </div>
 
 
-            <!-- Researcher -->
+            <div class="stat-card">
 
-            <div class="researcher-card">
-
-                <div class="avatar">
-                    R
+                <div class="stat-label">
+                    Published
                 </div>
 
-                <div class="researcher-info">
-                    <strong>Researcher</strong>
-                    <span>Demo workspace</span>
+                <div class="stat-value" id="publishedCount">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Published experiments
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Participants
+                </div>
+
+                <div class="stat-value" id="participantCount">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Participant sessions
                 </div>
 
             </div>
 
 
-            <!-- Navigation -->
+            <div class="stat-card">
 
-            <nav class="sidebar-nav">
+                <div class="stat-label">
+                    Responses
+                </div>
 
-                <p class="nav-label">WORKSPACE</p>
+                <div class="stat-value" id="responseCount">
+                    0
+                </div>
 
-                <a href="dashboard.html" class="nav-item active">
-                    <span class="nav-icon">▦</span>
-                    <span>Dashboard</span>
-                </a>
-
-                <a href="builder.html" class="nav-item">
-                    <span class="nav-icon">✎</span>
-                    <span>My Experiments</span>
-                </a>
-
-                <a href="results.html" class="nav-item">
-                    <span class="nav-icon">◉</span>
-                    <span>Results</span>
-                </a>
-
-                <a href="publish.html" class="nav-item">
-                    <span class="nav-icon">↗</span>
-                    <span>Publish</span>
-                </a>
-
-            </nav>
-
-
-            <!-- Sidebar bottom -->
-
-            <div class="sidebar-bottom">
-
-                <a href="index.html" class="sidebar-link">
-                    ← Back to Home
-                </a>
-
-                <div class="sidebar-version">
-                    CogniLab Prototype · 2026
+                <div class="stat-description">
+                    Trial responses
                 </div>
 
             </div>
 
-        </aside>
+        </section>
 
 
+        <!-- RECENT EXPERIMENT -->
+        <section class="dashboard-section">
 
-        <!-- =========================
-             MAIN CONTENT
-        ========================== -->
-
-        <main class="main-content">
-
-
-            <!-- =========================
-                 TOP BAR
-            ========================== -->
-
-            <header class="topbar">
-
-                <div class="mobile-brand">
-                    <a href="index.html" class="brand">
-                        <span>🧠</span>
-                        CogniLab
-                    </a>
-                </div>
-
-                <div class="topbar-actions">
-
-                    <a href="builder.html" class="topbar-button">
-                        + Create Experiment
-                    </a>
-
-                </div>
-
-            </header>
-
-
-
-            <!-- =========================
-                 PAGE HEADER
-            ========================== -->
-
-            <section class="page-header">
+            <div class="section-header">
 
                 <div>
-
-                    <span class="eyebrow">
-                        RESEARCH WORKSPACE
-                    </span>
-
-                    <h1>
-                        Good morning, Researcher
-                    </h1>
+                    <h2>Recent Experiments</h2>
 
                     <p>
-                        Design, run and analyze your cognitive experiments.
+                        Your latest psychology experiments.
+                    </p>
+                </div>
+
+                <a href="builder.html" class="secondary-button">
+                    Create Experiment
+                </a>
+
+            </div>
+
+
+            <div id="experimentList" class="experiment-list">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>No experiments yet</h3>
+
+                    <p>
+                        Create your first experiment to get started.
                     </p>
 
+                    <a href="builder.html" class="primary-button">
+                        Create Experiment
+                    </a>
+
                 </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK START -->
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Quick Start</h2>
+
+                    <p>
+                        Build your first cognitive experiment.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="builder.html" class="quick-card">
+
+                    <div class="quick-number">
+                        01
+                    </div>
+
+                    <div>
+                        <h3>Build</h3>
+
+                        <p>
+                            Create trials and configure your experiment.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="builder.html" class="quick-card">
+
+                    <div class="quick-number">
+                        02
+                    </div>
+
+                    <div>
+                        <h3>Preview</h3>
+
+                        <p>
+                            Test your experiment before publishing.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="publish.html" class="quick-card">
+
+                    <div class="quick-number">
+                        03
+                    </div>
+
+                    <div>
+                        <h3>Publish</h3>
+
+                        <p>
+                            Generate a participant experiment link.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="results.html" class="quick-card">
+
+                    <div class="quick-number">
+                        04
+                    </div>
+
+                    <div>
+                        <h3>Analyze</h3>
+
+                        <p>
+                            View participant responses and results.
+                        </p>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="backend/config.js"></script>
+<script src="backend/auth.js"></script>
+<script src="backend/experiments.js"></script>
+<script src="backend/participants.js"></script>
+<script src="backend/results.js"></script>
+
+
+<script>
+
+async function loadDashboard() {
+
+    /*
+     * First check whether the researcher is logged in.
+     */
+    const user = await requireResearcher();
+
+    if (!user) {
+        return;
+    }
+
+
+    /*
+     * Display researcher email.
+     */
+    document.getElementById("userEmail").textContent =
+        user.email || "Researcher";
+
+
+    /*
+     * Get experiments belonging to this researcher.
+     */
+    const result = await listExperiments();
+
+    if (result.error) {
+
+        console.error(result.error);
+
+        return;
+    }
+
+
+    const experiments = result.data || [];
+
+
+    /*
+     * Experiment count
+     */
+    document.getElementById("experimentCount").textContent =
+        experiments.length;
+
+
+    /*
+     * Published count
+     */
+    const publishedExperiments =
+        experiments.filter(experiment => experiment.is_published);
+
+    document.getElementById("publishedCount").textContent =
+        publishedExperiments.length;
+
+
+    /*
+     * Show experiments
+     */
+    displayExperiments(experiments);
+
+}
+
+
+/*
+ * Display experiment cards
+ */
+function displayExperiments(experiments) {
+
+    const list =
+        document.getElementById("experimentList");
+
+
+    if (!experiments.length) {
+
+        list.innerHTML = `
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    +
+                </div>
+
+                <h3>No experiments yet</h3>
+
+                <p>
+                    Create your first experiment to get started.
+                </p>
 
                 <a href="builder.html" class="primary-button">
                     Create Experiment
-                    <span>→</span>
                 </a>
 
-            </section>
+            </div>
+        `;
 
+        return;
+    }
 
 
-            <!-- =========================
-                 STATISTICS
-            ========================== -->
+    list.innerHTML = "";
 
-            <section class="stats-grid">
 
+    /*
+     * Show newest experiments first.
+     */
+    experiments.forEach(experiment => {
 
-                <article class="stat-card">
+        const card =
+            document.createElement("div");
 
-                    <div class="stat-icon blue">
-                        ◫
-                    </div>
+        card.className = "experiment-card";
 
-                    <div class="stat-content">
 
-                        <span class="stat-label">
-                            EXPERIMENTS
-                        </span>
+        const publishedText =
+            experiment.is_published
+                ? "Published"
+                : "Draft";
 
-                        <strong id="experimentCount">
-                            1
-                        </strong>
 
-                        <small>
-                            Your current studies
-                        </small>
+        card.innerHTML = `
 
-                    </div>
+            <div class="experiment-card-info">
 
-                </article>
+                <h3>
+                    ${escapeHTML(experiment.name || "Untitled Experiment")}
+                </h3>
 
+                <p>
+                    ${escapeHTML(
+                        experiment.description ||
+                        "No description provided."
+                    )}
+                </p>
 
+            </div>
 
-                <article class="stat-card">
 
-                    <div class="stat-icon purple">
-                        ▦
-                    </div>
+            <div class="experiment-card-status">
 
-                    <div class="stat-content">
+                <span class="
+                    status-badge
+                    ${experiment.is_published
+                        ? "published"
+                        : "draft"}
+                ">
+                    ${publishedText}
+                </span>
 
-                        <span class="stat-label">
-                            TRIALS
-                        </span>
+            </div>
 
-                        <strong id="trialCount">
-                            5
-                        </strong>
+        `;
 
-                        <small>
-                            Configured trials
-                        </small>
 
-                    </div>
+        list.appendChild(card);
 
-                </article>
+    });
 
+}
 
 
-                <article class="stat-card">
+/*
+ * Prevent experiment text from being interpreted as HTML.
+ */
+function escapeHTML(value) {
 
-                    <div class="stat-icon green">
-                        ◉
-                    </div>
+    const div =
+        document.createElement("div");
 
-                    <div class="stat-content">
+    div.textContent = value;
 
-                        <span class="stat-label">
-                            RESPONSES
-                        </span>
+    return div.innerHTML;
 
-                        <strong id="responseCount">
-                            5
-                        </strong>
+}
 
-                        <small>
-                            Recorded responses
-                        </small>
 
-                    </div>
+/*
+ * Logout
+ */
+document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async function() {
 
-                </article>
+        await logout();
 
+        window.location.href = "login.html";
 
+    });
 
-                <article class="stat-card">
 
-                    <div class="stat-icon orange">
-                        ⏱
-                    </div>
+/*
+ * Start dashboard
+ */
+loadDashboard();
 
-                    <div class="stat-content">
-
-                        <span class="stat-label">
-                            AVG. RT
-                        </span>
-
-                        <strong id="averageRT">
-                            1158 ms
-                        </strong>
-
-                        <small>
-                            Average reaction time
-                        </small>
-
-                    </div>
-
-                </article>
-
-            </section>
-
-
-
-            <!-- =========================
-                 CONTENT GRID
-            ========================== -->
-
-            <section class="content-grid">
-
-
-                <!-- =========================
-                     RECENT EXPERIMENT
-                ========================== -->
-
-                <div class="panel recent-panel">
-
-                    <div class="panel-header">
-
-                        <div>
-
-                            <span class="eyebrow">
-                                YOUR WORK
-                            </span>
-
-                            <h2>
-                                Recent experiment
-                            </h2>
-
-                        </div>
-
-                        <a href="builder.html" class="text-link">
-                            Open builder →
-                        </a>
-
-                    </div>
-
-
-
-                    <div class="experiment-card">
-
-                        <div class="experiment-card-top">
-
-                            <div class="experiment-symbol">
-                                RT
-                            </div>
-
-                            <span class="status-badge">
-                                Draft
-                            </span>
-
-                        </div>
-
-
-                        <h3 id="recentExperimentName">
-                            Reaction Time Study
-                        </h3>
-
-                        <p id="recentExperimentDescription">
-                            Browser reaction-time experiment
-                        </p>
-
-
-                        <div class="experiment-meta">
-
-                            <div>
-                                <span>Trials</span>
-                                <strong id="recentTrialCount">5</strong>
-                            </div>
-
-                            <div>
-                                <span>Responses</span>
-                                <strong id="recentResponseCount">5</strong>
-                            </div>
-
-                            <div>
-                                <span>Status</span>
-                                <strong id="recentStatus">Draft</strong>
-                            </div>
-
-                        </div>
-
-
-                        <div class="experiment-actions">
-
-                            <a href="builder.html" class="secondary-button">
-                                Configure
-                            </a>
-
-                            <a href="experiment.html" class="primary-small-button">
-                                Run Preview →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- =========================
-                     QUICK START
-                ========================== -->
-
-                <div class="panel quick-panel">
-
-                    <div class="panel-header">
-
-                        <div>
-
-                            <span class="eyebrow">
-                                GET STARTED
-                            </span>
-
-                            <h2>
-                                Quick start
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="quick-list">
-
-
-                        <a href="builder.html" class="quick-item">
-
-                            <div class="quick-number">
-                                01
-                            </div>
-
-                            <div class="quick-text">
-
-                                <strong>
-                                    Create your first experiment
-                                </strong>
-
-                                <span>
-                                    Configure trials and timing
-                                </span>
-
-                            </div>
-
-                            <span class="quick-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-
-                        <a href="experiment.html" class="quick-item">
-
-                            <div class="quick-number">
-                                02
-                            </div>
-
-                            <div class="quick-text">
-
-                                <strong>
-                                    Run participant preview
-                                </strong>
-
-                                <span>
-                                    Test the current experiment
-                                </span>
-
-                            </div>
-
-                            <span class="quick-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-
-                        <a href="results.html" class="quick-item">
-
-                            <div class="quick-number">
-                                03
-                            </div>
-
-                            <div class="quick-text">
-
-                                <strong>
-                                    Inspect results
-                                </strong>
-
-                                <span>
-                                    View the latest local results
-                                </span>
-
-                            </div>
-
-                            <span class="quick-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-
-                        <a href="publish.html" class="quick-item">
-
-                            <div class="quick-number">
-                                04
-                            </div>
-
-                            <div class="quick-text">
-
-                                <strong>
-                                    Publish experiment
-                                </strong>
-
-                                <span>
-                                    Create a participant link
-                                </span>
-
-                            </div>
-
-                            <span class="quick-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =========================
-                 INFORMATION BANNER
-            ========================== -->
-
-            <section class="info-banner">
-
-                <div class="info-icon">
-                    i
-                </div>
-
-                <div>
-
-                    <strong>
-                        Prototype workspace
-                    </strong>
-
-                    <p>
-                        This frontend prototype currently stores experiment
-                        data in your browser. Supabase database storage will
-                        be connected during the backend integration phase.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-        </main>
-
-    </div>
-
-
-
-    <!-- =========================
-         DASHBOARD SCRIPT
-    ========================== -->
-
-    <script>
-
-        /*
-         * Current prototype dashboard.
-         *
-         * This section reads the existing localStorage
-         * data created by the frontend prototype.
-         *
-         * Later, this will be replaced with Supabase
-         * database queries.
-         */
-
-
-        const experimentKey = "cognilabExperiment";
-        const resultsKey = "experimentResults";
-
-
-        const experiment =
-            JSON.parse(
-                localStorage.getItem(experimentKey)
-            );
-
-
-        const results =
-            JSON.parse(
-                localStorage.getItem(resultsKey)
-            );
-
-
-        /*
-         * Experiment statistics
-         */
-
-        if (experiment) {
-
-            const trials =
-                Array.isArray(experiment.trials)
-                    ? experiment.trials
-                    : [];
-
-
-            document.getElementById(
-                "experimentCount"
-            ).textContent = "1";
-
-
-            document.getElementById(
-                "trialCount"
-            ).textContent = trials.length;
-
-
-            document.getElementById(
-                "recentExperimentName"
-            ).textContent =
-                experiment.name ||
-                "Untitled Experiment";
-
-
-            document.getElementById(
-                "recentExperimentDescription"
-            ).textContent =
-                experiment.description ||
-                "Browser cognitive experiment";
-
-
-            document.getElementById(
-                "recentTrialCount"
-            ).textContent =
-                trials.length;
-
-        }
-
-
-
-        /*
-         * Result statistics
-         */
-
-        if (
-            results &&
-            Array.isArray(results.results)
-        ) {
-
-            const rows =
-                results.results;
-
-
-            const responseCount =
-                rows.length;
-
-
-            const validReactionTimes =
-                rows
-                    .map(
-                        item =>
-                            Number(item.reactionTime)
-                    )
-                    .filter(
-                        value =>
-                            Number.isFinite(value)
-                    );
-
-
-            let average =
-                null;
-
-
-            if (validReactionTimes.length > 0) {
-
-                average =
-                    validReactionTimes.reduce(
-                        (sum, value) =>
-                            sum + value,
-                        0
-                    )
-                    /
-                    validReactionTimes.length;
-
-            }
-
-
-            document.getElementById(
-                "responseCount"
-            ).textContent =
-                responseCount;
-
-
-            document.getElementById(
-                "recentResponseCount"
-            ).textContent =
-                responseCount;
-
-
-            document.getElementById(
-                "averageRT"
-            ).textContent =
-                average === null
-                    ? "—"
-                    : Math.round(average) + " ms";
-
-        }
-
-    </script>
+</script>
 
 </body>
-
 </html>

@@ -1,166 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Login | CogniLab
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="login.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — CogniLab</title>
+    <link rel="stylesheet" href="login.css">
 </head>
-
 
 <body>
 
-    <main class="login-page">
+<div class="login-page">
+
+    <div class="login-info">
+        <h1>CogniLab</h1>
+
+        <h2>Build better psychology experiments.</h2>
+
+        <p>
+            Create experiments, collect participant responses,
+            measure reaction times, and analyze your results.
+        </p>
+
+        <div class="login-features">
+            <div>✓ Create experiments</div>
+            <div>✓ Measure reaction time</div>
+            <div>✓ Randomize trials</div>
+            <div>✓ Analyze participant results</div>
+        </div>
+    </div>
 
 
-        <!-- =========================
-             LEFT INFORMATION SECTION
-        ========================== -->
+    <div class="login-card">
 
-        <section class="info">
+        <h2>Researcher Login</h2>
 
-            <a
-                href="index.html"
-                class="brand"
+        <p class="login-subtitle">
+            Sign in to your CogniLab account
+        </p>
+
+        <form id="loginForm">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="researcher@example.com"
+                required
             >
-                🧠 CogniLab
-            </a>
 
 
-            <div>
+            <label for="password">Password</label>
 
-                <span class="eyebrow">
-                    RESEARCH WORKSPACE
-                </span>
-
-
-                <h1>
-                    Build and run cognitive
-                    experiments from one place.
-                </h1>
-
-
-                <p>
-                    This prototype uses browser storage
-                    for the front-end demo. Real
-                    authentication and persistent research
-                    data will be connected in the backend
-                    phase.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             LOGIN CARD
-        ========================== -->
-
-        <section class="card">
-
-            <span class="eyebrow">
-                WELCOME BACK
-            </span>
-
-
-            <h2>
-                Researcher Sign In
-            </h2>
-
-
-            <p class="muted">
-                Use the demo account to enter
-                the prototype.
-            </p>
-
-
-            <form onsubmit="return false">
-
-
-                <!-- Email -->
-
-                <label>
-
-                    Email
-
-                    <input
-                        type="email"
-                        value="researcher@example.com"
-                        placeholder="Enter your email"
-                    >
-
-                </label>
-
-
-                <!-- Password -->
-
-                <label>
-
-                    Password
-
-                    <input
-                        type="password"
-                        value="demo1234"
-                        placeholder="Enter your password"
-                    >
-
-                </label>
-
-
-                <!-- Remember Me -->
-
-                <label class="remember">
-
-                    <input
-                        type="checkbox"
-                        checked
-                    >
-
-                    Remember me
-
-                </label>
-
-
-                <!-- Login -->
-
-                <a
-                    href="dashboard.html"
-                    class="login-button"
-                >
-                    Sign In
-                </a>
-
-            </form>
-
-
-            <!-- Back -->
-
-            <a
-                class="back"
-                href="index.html"
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
             >
-                ← Back to home
-            </a>
 
-        </section>
 
-    </main>
+            <button type="submit" class="login-button">
+                Sign In
+            </button>
+
+        </form>
+
+        <p id="loginMessage"></p>
+
+        <p class="demo-info">
+            Demo account:
+            <br>
+            researcher@example.com
+            <br>
+            demo1234
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- CogniLab backend -->
+<script src="config.js"></script>
+<script src="auth.js"></script>
+
+
+<script>
+
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+
+loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    loginMessage.textContent = "Signing in...";
+
+    try {
+
+        const result = await login(email, password);
+
+        if (result.error) {
+
+            loginMessage.textContent = result.error.message;
+            return;
+
+        }
+
+        loginMessage.textContent = "Login successful!";
+
+        window.location.href = "dashboard.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        loginMessage.textContent =
+            "Something went wrong. Please try again.";
+
+    }
+
+});
+
+</script>
 
 </body>
-
 </html>

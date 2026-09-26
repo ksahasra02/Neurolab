@@ -1,486 +1,621 @@
-/* =========================================
-   COGNILAB - PARTICIPANT EXPERIMENT
-========================================= */
-
-:root {
-    --bg: #070c17;
-    --panel: #0e1626;
-    --panel-light: #121c30;
-
-    --text: #f5f7fb;
-    --muted: #8793a8;
-    --subtle: #66758e;
-
-    --line: rgba(255, 255, 255, 0.08);
-
-    --blue: #4169e1;
-    --purple: #7257e8;
-
-    --green: #61d68b;
-    --red: #e77468;
-}
-
-
-/* =========================================
-   RESET
-========================================= */
+/* =========================================================
+   CogniLab Participant Experiment
+========================================================= */
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-
 html,
 body {
-    margin: 0;
+    width: 100%;
     min-height: 100%;
 }
 
-
 body {
-    background: var(--bg);
-    color: var(--text);
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-}
+    font-family: Arial, Helvetica, sans-serif;
 
+    background: #080d18;
+    color: #f5f7fb;
 
-/* =========================================
-   MAIN SHELL
-========================================= */
-
-.experiment-shell {
     min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(65, 105, 225, 0.06),
-            transparent 45%
-        );
 }
 
 
-/* =========================================
-   TOP BAR
-========================================= */
+/* =========================================================
+   EXPERIMENT CONTAINER
+========================================================= */
 
-.topbar {
-    height: 58px;
-
-    padding: 0 25px;
+.experiment-page {
+    min-height: 100vh;
 
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+.experiment-container {
+    width: 100%;
+    max-width: 900px;
+
+    background: #0e1626;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.experiment-header {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.experiment-header h1 {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+.experiment-header p {
+    color: #8c99ae;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-container {
+    margin-bottom: 35px;
+}
+
+.progress-info {
+    display: flex;
+
     justify-content: space-between;
 
-    border-bottom: 1px solid var(--line);
+    margin-bottom: 9px;
 
-    color: #8996ab;
+    color: #8c99ae;
 
-    font-size: 11px;
+    font-size: 13px;
+}
 
-    position: relative;
-    z-index: 20;
+.progress-bar {
+    width: 100%;
+    height: 7px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #4169e1,
+        #7257e8
+    );
+
+    border-radius: 10px;
+
+    transition: width 0.25s ease;
 }
 
 
-.topbar > span:first-child {
-    color: #d9dfeb;
-    font-weight: bold;
-}
+/* =========================================================
+   TRIAL AREA
+========================================================= */
 
+.trial-area {
+    min-height: 350px;
 
-.progress-area {
-    color: #78869c;
-}
-
-
-/* =========================================
-   SCREEN SYSTEM
-========================================= */
-
-.experiment-screen {
-    position: absolute;
-
-    inset: 58px 0 0;
-
-    display: none;
+    display: flex;
+    flex-direction: column;
 
     align-items: center;
     justify-content: center;
-
-    flex-direction: column;
 
     text-align: center;
 
-    padding: 30px;
-
-    animation: fadeIn 0.2s ease;
+    padding: 35px 20px;
 }
 
 
-.experiment-screen.active {
+/* =========================================================
+   TRIAL TITLE
+========================================================= */
+
+.trial-title {
+    font-size: 24px;
+
+    margin-bottom: 15px;
+}
+
+.trial-description {
+    max-width: 650px;
+
+    color: #8c99ae;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   STIMULUS
+========================================================= */
+
+.stimulus {
     display: flex;
-}
 
-
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-
-/* =========================================
-   EYEBROW
-========================================= */
-
-.eyebrow {
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    color: var(--subtle);
-
-    font-weight: bold;
-}
-
-
-/* =========================================
-   HEADINGS
-========================================= */
-
-.experiment-screen h1 {
-    margin: 14px 0 10px;
-
-    font-size: 35px;
-
-    line-height: 1.15;
-
-    letter-spacing: -0.7px;
-}
-
-
-.experiment-screen p {
-    max-width: 520px;
-
-    margin: 0;
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================================
-   BEGIN BUTTON
-========================================= */
-
-.begin-button,
-.results-button {
-
-    margin-top: 24px;
-
-    padding: 12px 19px;
-
-    border: 0;
-
-    border-radius: 7px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--blue),
-            var(--purple)
-        );
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-
-.begin-button:hover,
-.results-button:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 25px rgba(65, 105, 225, 0.22);
-}
-
-
-.begin-button:active,
-.results-button:active {
-
-    transform: translateY(0);
-
-}
-
-
-/* =========================================
-   FIXATION SCREEN
-========================================= */
-
-.fixation-screen {
-    gap: 15px;
-}
-
-
-.fixation {
-    font-size: 38px;
-
-    line-height: 1;
-
-    color: #c4ccda;
-
-    font-weight: normal;
-}
-
-
-.fixation-screen p {
-    margin-top: 8px;
-}
-
-
-/* =========================================
-   STIMULUS SCREEN
-========================================= */
-
-.stimulus-screen {
+    align-items: center;
     justify-content: center;
+
+    min-height: 160px;
+
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    font-size: 26px;
+    font-weight: 600;
+
+    color: #f5f7fb;
 }
 
 
-.stimulus-screen .eyebrow {
-    margin-bottom: 8px;
+/* Text stimulus */
+
+.stimulus-text {
+    padding: 25px 35px;
+
+    border-radius: 14px;
+
+    background: rgba(65, 105, 225, 0.08);
+
+    border: 1px solid rgba(65, 105, 225, 0.18);
 }
 
 
-/*
-    The JavaScript changes the size,
-    shape and background of #stimulus
-    according to the current trial.
-*/
+/* Circle stimulus */
 
-#stimulus {
-
-    width: 120px;
-    height: 120px;
-
-    margin: 28px 0;
-
-    background: var(--blue);
+.stimulus-circle {
+    width: 150px;
+    height: 150px;
 
     border-radius: 50%;
 
-    box-shadow:
-        0 0 55px rgba(65, 105, 225, 0.30);
-
-    transition:
-        transform 0.1s ease,
-        box-shadow 0.1s ease;
+    margin: auto;
 }
 
 
-#stimulus:hover {
+/* Square stimulus */
 
-    transform: scale(1.02);
+.stimulus-square {
+    width: 150px;
+    height: 150px;
 
+    border-radius: 12px;
+
+    margin: auto;
 }
 
 
-/* =========================================
-   RESPONSE SCREEN
-========================================= */
+/* =========================================================
+   RESPONSE AREA
+========================================================= */
 
-.response-content {
+.response-area {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.response-instruction {
+    color: #8c99ae;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSE BUTTONS
+========================================================= */
+
+.response-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    width: 100%;
+}
+
+.response-button {
+    min-width: 130px;
+
+    padding: 13px 20px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    background: #111c30;
+
+    color: #f5f7fb;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.response-button:hover {
+    border-color: #4169e1;
+
+    background: rgba(65, 105, 225, 0.12);
+
+    transform: translateY(-1px);
+}
+
+.response-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   KEYBOARD RESPONSE
+========================================================= */
+
+.keyboard-hint {
+    margin-top: 10px;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: #8c99ae;
+
+    font-size: 13px;
+}
+
+.keyboard-key {
+    display: inline-block;
+
+    min-width: 35px;
+
+    padding: 4px 9px;
+
+    margin: 0 3px;
+
+    border-radius: 5px;
+
+    background: #18243a;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    color: #f5f7fb;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   START / NEXT BUTTON
+========================================================= */
+
+.experiment-button {
+    padding: 14px 30px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #4169e1,
+        #7257e8
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.experiment-button:hover {
+    opacity: 0.92;
+
+    transform: translateY(-1px);
+}
+
+.experiment-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.feedback {
+    min-height: 25px;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.feedback.correct {
+    color: #61d68b;
+}
+
+.feedback.incorrect {
+    color: #ff7b8a;
+}
+
+
+/* =========================================================
+   COMPLETION SCREEN
+========================================================= */
+
+.completion-screen {
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+.completion-icon {
+    width: 70px;
+    height: 70px;
 
     display: flex;
 
     align-items: center;
+    justify-content: center;
 
-    flex-direction: column;
+    margin: 0 auto 25px;
+
+    border-radius: 50%;
+
+    background: rgba(97, 214, 139, 0.12);
+
+    border: 1px solid rgba(97, 214, 139, 0.25);
+
+    color: #61d68b;
+
+    font-size: 32px;
 }
 
+.completion-screen h2 {
+    font-size: 28px;
 
-.response-content h1 {
-
-    margin: 20px 0 8px;
-
-    font-size: 65px;
-
-    line-height: 1;
-
-    letter-spacing: -2px;
+    margin-bottom: 12px;
 }
-
-
-.response-content h1 span {
-
-    font-size: 18px;
-
-    color: #78869e;
-
-    letter-spacing: 0;
-}
-
-
-.response-content p:last-child {
-
-    margin-top: 22px;
-
-    color: #7e9aff;
-
-    font-size: 11px;
-
-}
-
-
-/* =========================================
-   COMPLETION SCREEN
-========================================= */
-
-.completion-screen h1 {
-
-    margin-top: 15px;
-
-}
-
 
 .completion-screen p {
+    color: #8c99ae;
 
-    margin-top: 2px;
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-screen {
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+.loading-spinner {
+    width: 42px;
+    height: 42px;
+
+    margin: 0 auto 20px;
+
+    border: 3px solid rgba(255, 255, 255, 0.1);
+
+    border-top-color: #4169e1;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-screen p {
+    color: #8c99ae;
+
+    font-size: 14px;
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 
 }
 
 
-.completion-screen .results-button {
+/* =========================================================
+   ERROR
+========================================================= */
 
-    display: inline-block;
+.error-screen {
+    text-align: center;
 
+    padding: 50px 20px;
+}
+
+.error-screen h2 {
+    color: #ff7b8a;
+
+    margin-bottom: 12px;
+}
+
+.error-screen p {
+    color: #8c99ae;
+
+    line-height: 1.6;
 }
 
 
-/* =========================================
-   KEYBOARD HINT
-========================================= */
+/* =========================================================
+   FOOTER
+========================================================= */
 
-kbd {
+.experiment-footer {
+    margin-top: 30px;
 
-    display: inline-block;
+    padding-top: 20px;
 
-    padding: 7px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 
-    border: 1px solid var(--line);
+    text-align: center;
 
-    border-bottom-color: rgba(255, 255, 255, 0.18);
+    color: #66748b;
 
-    border-radius: 6px;
-
-    background: var(--panel);
-
-    color: #aeb8ca;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 10px;
-
+    font-size: 12px;
 }
 
 
-/* =========================================
+/* =========================================================
+   FULLSCREEN MODE
+========================================================= */
+
+.experiment-page.fullscreen {
+    padding: 0;
+}
+
+.experiment-page.fullscreen .experiment-container {
+    max-width: none;
+
+    min-height: 100vh;
+
+    border: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
    RESPONSIVE
-========================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
-    .topbar {
-        padding: 0 16px;
+    .experiment-page {
+        padding: 15px;
     }
 
+    .experiment-container {
+        padding: 30px 20px;
 
-    .experiment-screen {
-        padding: 22px;
+        border-radius: 14px;
     }
 
-
-    .experiment-screen h1 {
-        font-size: 29px;
+    .experiment-header h1 {
+        font-size: 26px;
     }
 
-
-    .experiment-screen p {
-        max-width: 90%;
+    .trial-title {
+        font-size: 21px;
     }
 
-
-    #stimulus {
-        width: 100px;
-        height: 100px;
+    .stimulus-circle,
+    .stimulus-square {
+        width: 110px;
+        height: 110px;
     }
 
+    .response-buttons {
+        flex-direction: column;
 
-    .response-content h1 {
-        font-size: 52px;
+        align-items: stretch;
+    }
+
+    .response-button {
+        width: 100%;
     }
 
 }
 
 
-@media (max-width: 450px) {
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
 
-    .topbar {
-        height: 52px;
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #4169e1;
 
-        font-size: 10px;
-    }
-
-
-    .experiment-screen {
-        inset: 52px 0 0;
-    }
-
-
-    .experiment-screen h1 {
-        font-size: 25px;
-    }
-
-
-    .begin-button,
-    .results-button {
-        padding: 11px 15px;
-    }
-
-
-    #stimulus {
-        width: 85px;
-        height: 85px;
-    }
-
+    outline-offset: 3px;
 }

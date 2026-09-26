@@ -1,1196 +1,1427 @@
 /* =========================================================
-   COgNILAB EXPERIMENT BUILDER
+   CogniLab Experiment Builder
+   Supabase version
 ========================================================= */
 
 
-/* =========================================================
-   STORAGE
-========================================================= */
+/* ---------------------------------------------------------
+   STATE
+--------------------------------------------------------- */
 
-const STORAGE_KEY = "cognilabExperiment";
+let trials = [];
 
+let experimentId = null;
 
-/* =========================================================
-   DEFAULT EXPERIMENT
-========================================================= */
+let saving = false;
 
-const defaultExperiment = {
 
-    name: "Reaction Time Study",
+/* ---------------------------------------------------------
+   ELEMENTS
+--------------------------------------------------------- */
 
-    description:
-        "Measure participant reaction time to visual stimuli.",
+const experimentName =
+    document.getElementById("experimentName");
 
-    randomizeTrials: false,
+const experimentDescription =
+    document.getElementById("experimentDescription");
 
-    randomizeStimulus: false,
+const randomizeTrials =
+    document.getElementById("randomizeTrials");
 
-    trials: [
+const randomizeStimuli =
+    document.getElementById("randomizeStimuli");
 
-        {
-            id: "trial-1",
+const trialList =
+    document.getElementById("trialList");
 
-            name: "Blue Circle",
+const noTrials =
+    document.getElementById("noTrials");
 
-            type: "reaction",
+const addTrialBtn =
+    document.getElementById("addTrialBtn");
 
-            stimulus: "circle",
+const addFirstTrialBtn =
+    document.getElementById("addFirstTrialBtn");
 
-            description:
-                "Press SPACE as quickly as possible when the circle appears.",
+const saveBtn =
+    document.getElementById("saveBtn");
 
-            duration: 500,
+const previewBtn =
+    document.getElementById("previewBtn");
 
-            delay: 1000,
+const builderMessage =
+    document.getElementById("builderMessage");
 
-            responseMethod: "keyboard",
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-            correctKey: "Space",
 
-            correctNext: null,
+/* ---------------------------------------------------------
+   INITIALIZE
+--------------------------------------------------------- */
 
-            incorrectNext: null
-        },
+async function initializeBuilder() {
 
+    const user = await requireResearcher();
 
-        {
-            id: "trial-2",
-
-            name: "Blue Square",
-
-            type: "reaction",
-
-            stimulus: "square",
-
-            description:
-                "Press ENTER as quickly as possible when the square appears.",
-
-            duration: 500,
-
-            delay: 1000,
-
-            responseMethod: "keyboard",
-
-            correctKey: "Enter",
-
-            correctNext: null,
-
-            incorrectNext: null
-        },
-
-
-        {
-            id: "trial-3",
-
-            name: "Circle Response",
-
-            type: "reaction",
-
-            stimulus: "circle",
-
-            description:
-                "Respond when the circle appears.",
-
-            duration: 500,
-
-            delay: 1000,
-
-            responseMethod: "keyboard",
-
-            correctKey: "Space",
-
-            correctNext: null,
-
-            incorrectNext: null
-        },
-
-
-        {
-            id: "trial-4",
-
-            name: "Square Response",
-
-            type: "reaction",
-
-            stimulus: "square",
-
-            description:
-                "Respond when the square appears.",
-
-            duration: 500,
-
-            delay: 1000,
-
-            responseMethod: "keyboard",
-
-            correctKey: "Enter",
-
-            correctNext: null,
-
-            incorrectNext: null
-        },
-
-
-        {
-            id: "trial-5",
-
-            name: "Final Trial",
-
-            type: "reaction",
-
-            stimulus: "circle",
-
-            description:
-                "Complete the final reaction-time trial.",
-
-            duration: 500,
-
-            delay: 1000,
-
-            responseMethod: "keyboard",
-
-            correctKey: "Space",
-
-            correctNext: null,
-
-            incorrectNext: null
-        }
-
-    ]
-
-};
-
-
-/* =========================================================
-   LOAD EXPERIMENT
-========================================================= */
-
-let experiment;
-
-
-try {
-
-    const savedExperiment =
-        localStorage.getItem(STORAGE_KEY);
-
-    experiment =
-        savedExperiment
-            ? JSON.parse(savedExperiment)
-            : JSON.parse(
-                JSON.stringify(defaultExperiment)
-            );
-
-} catch (error) {
-
-    console.error(
-        "Could not load experiment:",
-        error
-    );
-
-    experiment =
-        JSON.parse(
-            JSON.stringify(defaultExperiment)
-        );
-}
-
-
-/* =========================================================
-   ENSURE OLD DATA HAS TRIAL IDs
-========================================================= */
-
-experiment.trials.forEach((trial, index) => {
-
-    if (!trial.id) {
-
-        trial.id =
-            `trial-${Date.now()}-${index}`;
-
-    }
-
-});
-
-
-/* =========================================================
-   CURRENT TRIAL
-========================================================= */
-
-let selectedTrialIndex = 0;
-
-
-/* =========================================================
-   HELPER
-========================================================= */
-
-function getElement(id) {
-
-    return document.getElementById(id);
-
-}
-
-
-/* =========================================================
-   ELEMENT REFERENCES
-========================================================= */
-
-const elements = {
-
-    list:
-        getElement("trialList"),
-
-    count:
-        getElement("trialCount"),
-
-    add:
-        getElement("addTrialButton"),
-
-    delete:
-        getElement("deleteTrialButton"),
-
-    saveStatus:
-        getElement("saveStatus"),
-
-    name:
-        getElement("trialName"),
-
-    type:
-        getElement("trialType"),
-
-    stimulus:
-        getElement("stimulusType"),
-
-    description:
-        getElement("stimulusDescription"),
-
-    delay:
-        getElement("delay"),
-
-    duration:
-        getElement("duration"),
-
-    method:
-        getElement("responseMethod"),
-
-    key:
-        getElement("allowedKey"),
-
-    randomizeTrials:
-        getElement("randomizeTrials"),
-
-    randomizeStimulus:
-        getElement("randomizeStimulus"),
-
-    number:
-        getElement("settingsTrialNumber"),
-
-    correctNext:
-        getElement("correctNext"),
-
-    incorrectNext:
-        getElement("incorrectNext"),
-
-    previewTitle:
-        getElement("previewTitle"),
-
-    previewDescription:
-        getElement("previewDescription"),
-
-    previewKey:
-        getElement("previewKey"),
-
-    previewStimulus:
-        getElement("builderStimulus"),
-
-    previewProgress:
-        getElement("previewProgress"),
-
-    timelineStimulus:
-        getElement("timelineStimulus"),
-
-    timelineResponse:
-        getElement("timelineResponse")
-
-};
-
-
-/* =========================================================
-   SAVE EXPERIMENT
-========================================================= */
-
-function saveExperiment() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(experiment)
-    );
-
-    elements.saveStatus.textContent =
-        "Saved";
-
-    elements.saveStatus.style.color =
-        "#61d68b";
-}
-
-
-/* =========================================================
-   SHOW UNSAVED STATUS
-========================================================= */
-
-function markUnsaved() {
-
-    elements.saveStatus.textContent =
-        "Unsaved changes";
-
-    elements.saveStatus.style.color =
-        "#f4b942";
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replace(
-            /[&<>"']/g,
-
-            function (character) {
-
-                const replacements = {
-
-                    "&": "&amp;",
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#039;"
-
-                };
-
-                return replacements[character];
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   GET KEY DISPLAY NAME
-========================================================= */
-
-function getKeyDisplayName(key) {
-
-    const names = {
-
-        Space: "SPACE",
-
-        Enter: "ENTER",
-
-        ArrowLeft: "LEFT ARROW",
-
-        ArrowRight: "RIGHT ARROW"
-
-    };
-
-    return names[key] || key;
-
-}
-
-
-/* =========================================================
-   GET TRIAL NUMBER
-========================================================= */
-
-function formatTrialNumber(index) {
-
-    return String(index + 1)
-        .padStart(2, "0");
-
-}
-
-
-/* =========================================================
-   BRANCH OPTIONS
-========================================================= */
-
-function populateBranchOptions(
-    selectElement,
-    currentTarget
-) {
-
-    if (!selectElement) {
+    if (!user) {
         return;
     }
 
+    /*
+     * Check whether we are editing an existing experiment.
+     *
+     * Example:
+     * builder.html?id=EXPERIMENT_ID
+     */
 
-    selectElement.innerHTML = "";
+    const params =
+        new URLSearchParams(window.location.search);
 
-
-    /* Next trial option */
-
-    const nextOption =
-        document.createElement("option");
-
-    nextOption.value = "";
-
-    nextOption.textContent =
-        "Next trial / End";
-
-    selectElement.appendChild(
-        nextOption
-    );
+    experimentId =
+        params.get("id");
 
 
-    /* Individual trial options */
+    if (experimentId) {
 
-    experiment.trials.forEach(
-        function (trial, index) {
-
-            /*
-             * A trial cannot branch
-             * to itself.
-             */
-
-            if (
-                index === selectedTrialIndex
-            ) {
-
-                return;
-
-            }
-
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                trial.id;
-
-            option.textContent =
-                `Trial ${formatTrialNumber(index)} — ${trial.name}`;
-
-            selectElement.appendChild(
-                option
-            );
-
-        }
-    );
-
-
-    if (currentTarget) {
-
-        selectElement.value =
-            currentTarget;
+        await loadExperiment(experimentId);
 
     } else {
 
-        selectElement.value =
-            "";
+        /*
+         * Start with one empty trial.
+         */
+
+        addTrial();
 
     }
 
+    renderTrials();
 }
 
 
-/* =========================================================
-   RENDER TRIAL LIST
-========================================================= */
+/* ---------------------------------------------------------
+   LOAD EXISTING EXPERIMENT
+--------------------------------------------------------- */
 
-function renderTrialList() {
+async function loadExperiment(id) {
 
-    elements.list.innerHTML = "";
-
-
-    elements.count.textContent =
-        experiment.trials.length;
+    showMessage("Loading experiment...");
 
 
-    experiment.trials.forEach(
-        function (trial, index) {
-
-            const button =
-                document.createElement("button");
-
-
-            button.type = "button";
-
-
-            button.className =
-                "trial-item" +
-                (
-                    index === selectedTrialIndex
-                        ? " active"
-                        : ""
-                );
+    const {
+        data: experiment,
+        error: experimentError
+    } = await supabaseClient
+        .from("experiments")
+        .select("*")
+        .eq("id", id)
+        .single();
 
 
-            button.innerHTML = `
+    if (experimentError) {
 
-                <span class="trial-number">
-                    ${formatTrialNumber(index)}
-                </span>
+        console.error(experimentError);
 
-                <span class="trial-name">
-                    ${escapeHTML(trial.name)}
-                </span>
+        showMessage(
+            "Could not load the experiment.",
+            true
+        );
 
-            `;
+        return;
+    }
 
+
+    /*
+     * Put experiment information into the form.
+     */
+
+    experimentName.value =
+        experiment.name || "";
+
+    experimentDescription.value =
+        experiment.description || "";
+
+    randomizeTrials.checked =
+        experiment.randomize_trials || false;
+
+    randomizeStimuli.checked =
+        experiment.randomize_stimuli || false;
+
+
+    /*
+     * Load trials.
+     */
+
+    const {
+        data: trialData,
+        error: trialError
+    } = await supabaseClient
+        .from("trials")
+        .select("*")
+        .eq("experiment_id", id)
+        .order("trial_order", {
+            ascending: true
+        });
+
+
+    if (trialError) {
+
+        console.error(trialError);
+
+        showMessage(
+            "Experiment loaded, but trials could not be loaded.",
+            true
+        );
+
+        return;
+    }
+
+
+    trials =
+        (trialData || []).map(trial => {
+
+            return {
+
+                id: trial.id,
+
+                name:
+                    trial.name || "",
+
+                type:
+                    trial.trial_type || "reaction",
+
+                stimulus:
+                    trial.stimulus || "",
+
+                description:
+                    trial.description || "",
+
+                delay:
+                    trial.delay_ms ?? 0,
+
+                duration:
+                    trial.duration_ms ?? 0,
+
+                responseMethod:
+                    trial.response_method || "keyboard",
+
+                correctKey:
+                    trial.correct_key || "",
+
+                correctNext:
+                    trial.correct_next || "",
+
+                incorrectNext:
+                    trial.incorrect_next || ""
+
+            };
+
+        });
+
+
+    showMessage("");
+}
+
+
+/* ---------------------------------------------------------
+   ADD TRIAL
+--------------------------------------------------------- */
+
+function addTrial() {
+
+    const trial = {
+
+        /*
+         * Temporary ID.
+         *
+         * This lets us connect branching before the
+         * database IDs exist.
+         */
+
+        id:
+            "local-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2, 8),
+
+        name:
+            `Trial ${trials.length + 1}`,
+
+        type:
+            "reaction",
+
+        stimulus:
+            "",
+
+        description:
+            "",
+
+        delay:
+            0,
+
+        duration:
+            0,
+
+        responseMethod:
+            "keyboard",
+
+        correctKey:
+            "Space",
+
+        correctNext:
+            "",
+
+        incorrectNext:
+            ""
+
+    };
+
+
+    trials.push(trial);
+
+    renderTrials();
+}
+
+
+/* ---------------------------------------------------------
+   DELETE TRIAL
+--------------------------------------------------------- */
+
+function deleteTrial(index) {
+
+    if (trials.length === 1) {
+
+        alert(
+            "Your experiment must contain at least one trial."
+        );
+
+        return;
+    }
+
+
+    trials.splice(index, 1);
+
+    renderTrials();
+}
+
+
+/* ---------------------------------------------------------
+   RENDER TRIALS
+--------------------------------------------------------- */
+
+function renderTrials() {
+
+    trialList.innerHTML = "";
+
+
+    if (trials.length === 0) {
+
+        noTrials.style.display = "block";
+
+        return;
+    }
+
+
+    noTrials.style.display = "none";
+
+
+    trials.forEach((trial, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "trial-card";
+
+
+        card.innerHTML = `
+
+            <div class="trial-card-header">
+
+                <div>
+
+                    <span class="trial-number">
+                        Trial ${index + 1}
+                    </span>
+
+                    <h3>
+                        ${escapeHTML(trial.name)}
+                    </h3>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-trial-btn"
+                    data-index="${index}">
+                    Delete
+                </button>
+
+            </div>
+
+
+            <div class="trial-form-grid">
+
+                <!-- Trial name -->
+
+                <div class="form-group">
+
+                    <label>
+                        Trial Name
+                    </label>
+
+                    <input
+                        type="text"
+                        class="trial-name"
+                        data-index="${index}"
+                        value="${escapeAttribute(trial.name)}"
+                        placeholder="Trial name"
+                    >
+
+                </div>
+
+
+                <!-- Trial type -->
+
+                <div class="form-group">
+
+                    <label>
+                        Trial Type
+                    </label>
+
+                    <select
+                        class="trial-type"
+                        data-index="${index}">
+
+                        <option
+                            value="instruction"
+                            ${trial.type === "instruction" ? "selected" : ""}>
+                            Instruction
+                        </option>
+
+                        <option
+                            value="reaction"
+                            ${trial.type === "reaction" ? "selected" : ""}>
+                            Reaction Time
+                        </option>
+
+                        <option
+                            value="choice"
+                            ${trial.type === "choice" ? "selected" : ""}>
+                            Choice
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Stimulus -->
+
+                <div class="form-group">
+
+                    <label>
+                        Stimulus
+                    </label>
+
+                    <input
+                        type="text"
+                        class="trial-stimulus"
+                        data-index="${index}"
+                        value="${escapeAttribute(trial.stimulus)}"
+                        placeholder="e.g. Red circle"
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        class="trial-description"
+                        data-index="${index}"
+                        value="${escapeAttribute(trial.description)}"
+                        placeholder="What should the participant do?"
+                    >
+
+                </div>
+
+
+                <!-- Delay -->
+
+                <div class="form-group">
+
+                    <label>
+                        Delay (ms)
+                    </label>
+
+                    <input
+                        type="number"
+                        class="trial-delay"
+                        data-index="${index}"
+                        value="${trial.delay}"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <!-- Duration -->
+
+                <div class="form-group">
+
+                    <label>
+                        Duration (ms)
+                    </label>
+
+                    <input
+                        type="number"
+                        class="trial-duration"
+                        data-index="${index}"
+                        value="${trial.duration}"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <!-- Response -->
+
+                <div class="form-group">
+
+                    <label>
+                        Response Method
+                    </label>
+
+                    <select
+                        class="trial-response"
+                        data-index="${index}">
+
+                        <option
+                            value="keyboard"
+                            ${trial.responseMethod === "keyboard" ? "selected" : ""}>
+                            Keyboard
+                        </option>
+
+                        <option
+                            value="mouse"
+                            ${trial.responseMethod === "mouse" ? "selected" : ""}>
+                            Mouse
+                        </option>
+
+                        <option
+                            value="none"
+                            ${trial.responseMethod === "none" ? "selected" : ""}>
+                            None
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Correct key -->
+
+                <div class="form-group">
+
+                    <label>
+                        Correct Key
+                    </label>
+
+                    <input
+                        type="text"
+                        class="trial-correct-key"
+                        data-index="${index}"
+                        value="${escapeAttribute(trial.correctKey)}"
+                        placeholder="e.g. Space"
+                    >
+
+                </div>
+
+
+                <!-- Correct branch -->
+
+                <div class="form-group">
+
+                    <label>
+                        If Correct → Trial
+                    </label>
+
+                    <select
+                        class="trial-correct-next"
+                        data-index="${index}">
+
+                        ${getTrialOptions(
+                            trial.correctNext,
+                            index
+                        )}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Incorrect branch -->
+
+                <div class="form-group">
+
+                    <label>
+                        If Incorrect → Trial
+                    </label>
+
+                    <select
+                        class="trial-incorrect-next"
+                        data-index="${index}">
+
+                        ${getTrialOptions(
+                            trial.incorrectNext,
+                            index
+                        )}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        trialList.appendChild(card);
+
+    });
+
+
+    attachTrialEvents();
+}
+
+
+/* ---------------------------------------------------------
+   TRIAL OPTIONS
+--------------------------------------------------------- */
+
+function getTrialOptions(selectedId, currentIndex) {
+
+    let html = `
+        <option value="">
+            End experiment
+        </option>
+    `;
+
+
+    trials.forEach((trial, index) => {
+
+        /*
+         * A trial should not branch to itself.
+         */
+
+        if (index === currentIndex) {
+            return;
+        }
+
+
+        html += `
+            <option
+                value="${escapeAttribute(trial.id)}"
+                ${trial.id === selectedId ? "selected" : ""}>
+                Trial ${index + 1}
+            </option>
+        `;
+
+    });
+
+
+    return html;
+}
+
+
+/* ---------------------------------------------------------
+   TRIAL EVENTS
+--------------------------------------------------------- */
+
+function attachTrialEvents() {
+
+    document
+        .querySelectorAll(".delete-trial-btn")
+        .forEach(button => {
 
             button.addEventListener(
                 "click",
-                function () {
+                function() {
 
-                    saveCurrentTrial();
+                    const index =
+                        Number(this.dataset.index);
 
-                    selectedTrialIndex =
-                        index;
-
-                    renderTrialList();
-
-                    loadSelectedTrial();
+                    deleteTrial(index);
 
                 }
             );
 
+        });
 
-            elements.list.appendChild(
-                button
-            );
 
-        }
-    );
+    document
+        .querySelectorAll(".trial-name")
+        .forEach(input => {
 
+            input.addEventListener(
+                "input",
+                function() {
 
-    updateBranchOptions();
-
-}
-
-
-/* =========================================================
-   UPDATE BRANCH OPTIONS
-========================================================= */
-
-function updateBranchOptions() {
-
-    const trial =
-        experiment.trials[
-            selectedTrialIndex
-        ];
-
-
-    if (!trial) {
-        return;
-    }
-
-
-    populateBranchOptions(
-        elements.correctNext,
-        trial.correctNext
-    );
-
-
-    populateBranchOptions(
-        elements.incorrectNext,
-        trial.incorrectNext
-    );
-
-}
-
-
-/* =========================================================
-   LOAD SELECTED TRIAL
-========================================================= */
-
-function loadSelectedTrial() {
-
-    const trial =
-        experiment.trials[
-            selectedTrialIndex
-        ];
-
-
-    if (!trial) {
-        return;
-    }
-
-
-    elements.name.value =
-        trial.name || "";
-
-
-    elements.type.value =
-        trial.type || "reaction";
-
-
-    elements.stimulus.value =
-        trial.stimulus || "circle";
-
-
-    elements.description.value =
-        trial.description || "";
-
-
-    elements.delay.value =
-        trial.delay ?? 1000;
-
-
-    elements.duration.value =
-        trial.duration ?? 500;
-
-
-    elements.method.value =
-        trial.responseMethod ||
-        "keyboard";
-
-
-    elements.key.value =
-        trial.correctKey ||
-        "Space";
-
-
-    elements.number.textContent =
-        formatTrialNumber(
-            selectedTrialIndex
-        );
-
-
-    updateBranchOptions();
-
-    updatePreview();
-
-}
-
-
-/* =========================================================
-   SAVE CURRENT TRIAL
-========================================================= */
-
-function saveCurrentTrial() {
-
-    const trial =
-        experiment.trials[
-            selectedTrialIndex
-        ];
-
-
-    if (!trial) {
-        return;
-    }
-
-
-    trial.name =
-        elements.name.value.trim() ||
-        `Trial ${selectedTrialIndex + 1}`;
-
-
-    trial.type =
-        elements.type.value;
-
-
-    trial.stimulus =
-        elements.stimulus.value;
-
-
-    trial.description =
-        elements.description.value;
-
-
-    trial.delay =
-        Number(elements.delay.value) || 0;
-
-
-    trial.duration =
-        Number(elements.duration.value) || 500;
-
-
-    trial.responseMethod =
-        elements.method.value;
-
-
-    trial.correctKey =
-        elements.key.value;
-
-
-    trial.correctNext =
-        elements.correctNext.value ||
-        null;
-
-
-    trial.incorrectNext =
-        elements.incorrectNext.value ||
-        null;
-
-
-    updatePreview();
-
-    markUnsaved();
-
-}
-
-
-/* =========================================================
-   UPDATE PREVIEW
-========================================================= */
-
-function updatePreview() {
-
-    const trial =
-        experiment.trials[
-            selectedTrialIndex
-        ];
-
-
-    if (!trial) {
-        return;
-    }
-
-
-    elements.previewProgress.textContent =
-        `Trial ${formatTrialNumber(selectedTrialIndex)}`;
-
-
-    elements.previewTitle.textContent =
-        trial.name;
-
-
-    elements.previewDescription.textContent =
-        trial.description;
-
-
-    elements.previewKey.textContent =
-        getKeyDisplayName(
-            trial.correctKey
-        );
-
-
-    /*
-     * Stimulus shape
-     */
-
-    elements.previewStimulus.className =
-        "preview-stimulus " +
-        (
-            trial.stimulus === "square"
-                ? "square"
-                : "circle"
-        );
-
-
-    /*
-     * Timeline information
-     */
-
-    elements.timelineStimulus.textContent =
-        `${trial.stimulus} appears after ${trial.delay} ms`;
-
-
-    elements.timelineResponse.textContent =
-        `Wait for ${getKeyDisplayName(
-            trial.correctKey
-        )} response`;
-
-}
-
-
-/* =========================================================
-   ADD TRIAL
-========================================================= */
-
-elements.add.addEventListener(
-    "click",
-    function () {
-
-        saveCurrentTrial();
-
-
-        const newTrialNumber =
-            experiment.trials.length + 1;
-
-
-        const newTrial = {
-
-            id:
-                `trial-${Date.now()}`,
-
-            name:
-                `Trial ${newTrialNumber}`,
-
-            type:
-                "reaction",
-
-            stimulus:
-                "circle",
-
-            description:
-                "Press SPACE as quickly as possible when the stimulus appears.",
-
-            duration:
-                500,
-
-            delay:
-                1000,
-
-            responseMethod:
-                "keyboard",
-
-            correctKey:
-                "Space",
-
-            correctNext:
-                null,
-
-            incorrectNext:
-                null
-
-        };
-
-
-        experiment.trials.push(
-            newTrial
-        );
-
-
-        selectedTrialIndex =
-            experiment.trials.length - 1;
-
-
-        renderTrialList();
-
-        loadSelectedTrial();
-
-        markUnsaved();
-
-    }
-);
-
-
-/* =========================================================
-   DELETE TRIAL
-========================================================= */
-
-elements.delete.addEventListener(
-    "click",
-    function () {
-
-        /*
-         * Always keep at least
-         * one trial.
-         */
-
-        if (
-            experiment.trials.length <= 1
-        ) {
-
-            alert(
-                "At least one trial must remain."
-            );
-
-            return;
-
-        }
-
-
-        const trialNumber =
-            selectedTrialIndex + 1;
-
-
-        const confirmed =
-            confirm(
-                `Are you sure you want to delete Trial ${trialNumber}?`
-            );
-
-
-        if (!confirmed) {
-            return;
-        }
-
-
-        const deletedTrial =
-            experiment.trials[
-                selectedTrialIndex
-            ];
-
-
-        const deletedTrialId =
-            deletedTrial.id;
-
-
-        /*
-         * Remove the trial.
-         */
-
-        experiment.trials.splice(
-            selectedTrialIndex,
-            1
-        );
-
-
-        /*
-         * Remove any branching
-         * references pointing to
-         * the deleted trial.
-         */
-
-        experiment.trials.forEach(
-            function (trial) {
-
-                if (
-                    trial.correctNext ===
-                    deletedTrialId
-                ) {
-
-                    trial.correctNext = null;
+                    trials[
+                        Number(this.dataset.index)
+                    ].name = this.value;
 
                 }
+            );
+
+        });
 
 
-                if (
-                    trial.incorrectNext ===
-                    deletedTrialId
-                ) {
+    document
+        .querySelectorAll(".trial-type")
+        .forEach(input => {
 
-                    trial.incorrectNext = null;
+            input.addEventListener(
+                "change",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].type = this.value;
 
                 }
+            );
 
-            }
+        });
+
+
+    document
+        .querySelectorAll(".trial-stimulus")
+        .forEach(input => {
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].stimulus = this.value;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-description")
+        .forEach(input => {
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].description = this.value;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-delay")
+        .forEach(input => {
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].delay =
+                        Number(this.value) || 0;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-duration")
+        .forEach(input => {
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].duration =
+                        Number(this.value) || 0;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-response")
+        .forEach(input => {
+
+            input.addEventListener(
+                "change",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].responseMethod =
+                        this.value;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-correct-key")
+        .forEach(input => {
+
+            input.addEventListener(
+                "input",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].correctKey =
+                        this.value;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-correct-next")
+        .forEach(input => {
+
+            input.addEventListener(
+                "change",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].correctNext =
+                        this.value;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".trial-incorrect-next")
+        .forEach(input => {
+
+            input.addEventListener(
+                "change",
+                function() {
+
+                    trials[
+                        Number(this.dataset.index)
+                    ].incorrectNext =
+                        this.value;
+
+                }
+            );
+
+        });
+
+}
+
+
+/* ---------------------------------------------------------
+   SAVE EXPERIMENT
+--------------------------------------------------------- */
+
+async function saveExperiment() {
+
+    if (saving) {
+        return;
+    }
+
+
+    const name =
+        experimentName.value.trim();
+
+    const description =
+        experimentDescription.value.trim();
+
+
+    if (!name) {
+
+        showMessage(
+            "Please enter an experiment name.",
+            true
         );
 
+        experimentName.focus();
+
+        return;
+    }
+
+
+    if (trials.length === 0) {
+
+        showMessage(
+            "Please add at least one trial.",
+            true
+        );
+
+        return;
+    }
+
+
+    saving = true;
+
+    saveBtn.disabled = true;
+
+    saveBtn.textContent =
+        "Saving...";
+
+
+    try {
 
         /*
-         * Fix selected index.
+         * Make sure the researcher is logged in.
          */
 
-        if (
-            selectedTrialIndex >=
-            experiment.trials.length
-        ) {
+        const user =
+            await requireResearcher();
 
-            selectedTrialIndex =
-                experiment.trials.length - 1;
-
-        }
-
-
-        renderTrialList();
-
-        loadSelectedTrial();
-
-        saveExperiment();
-
-    }
-);
-
-
-/* =========================================================
-   FIELD CHANGE HANDLERS
-========================================================= */
-
-const editableFields = [
-
-    elements.name,
-
-    elements.type,
-
-    elements.stimulus,
-
-    elements.description,
-
-    elements.delay,
-
-    elements.duration,
-
-    elements.method,
-
-    elements.key,
-
-    elements.correctNext,
-
-    elements.incorrectNext
-
-];
-
-
-editableFields.forEach(
-    function (field) {
-
-        if (!field) {
+        if (!user) {
             return;
         }
 
 
-        field.addEventListener(
-            "input",
-            function () {
+        let currentExperimentId =
+            experimentId;
 
-                saveCurrentTrial();
 
+        /* ---------------------------------------------
+           CREATE OR UPDATE EXPERIMENT
+        --------------------------------------------- */
+
+        if (!currentExperimentId) {
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .from("experiments")
+                .insert({
+
+                    researcher_id:
+                        user.id,
+
+                    name:
+                        name,
+
+                    description:
+                        description,
+
+                    randomize_trials:
+                        randomizeTrials.checked,
+
+                    randomize_stimuli:
+                        randomizeStimuli.checked
+
+                })
+                .select()
+                .single();
+
+
+            if (error) {
+                throw error;
             }
-        );
 
 
-        field.addEventListener(
-            "change",
-            function () {
+            currentExperimentId =
+                data.id;
 
-                saveCurrentTrial();
-
-            }
-        );
-
-    }
-);
+            experimentId =
+                data.id;
 
 
-/* =========================================================
-   RANDOMIZATION
-========================================================= */
+            /*
+             * Update browser URL.
+             */
 
-elements.randomizeTrials.addEventListener(
-    "change",
-    function () {
+            window.history.replaceState(
+                {},
+                "",
+                `builder.html?id=${data.id}`
+            );
 
-        experiment.randomizeTrials =
-            elements.randomizeTrials.checked;
+        } else {
 
+            const {
+                error
+            } = await supabaseClient
+                .from("experiments")
+                .update({
 
-        saveExperiment();
+                    name:
+                        name,
 
-    }
-);
+                    description:
+                        description,
 
+                    randomize_trials:
+                        randomizeTrials.checked,
 
-elements.randomizeStimulus.addEventListener(
-    "change",
-    function () {
+                    randomize_stimuli:
+                        randomizeStimuli.checked
 
-        experiment.randomizeStimulus =
-            elements.randomizeStimulus.checked;
-
-
-        saveExperiment();
-
-    }
-);
-
-
-/* =========================================================
-   DEMO TRIAL
-========================================================= */
-
-const demoButton =
-    getElement("demoButton");
-
-
-demoButton.addEventListener(
-    "click",
-    function () {
-
-        const trial =
-            experiment.trials[
-                selectedTrialIndex
-            ];
-
-
-        if (!trial) {
-            return;
-        }
-
-
-        demoButton.disabled = true;
-
-        demoButton.textContent =
-            "Get Ready...";
-
-
-        elements.previewStimulus.style.opacity =
-            "0";
-
-
-        /*
-         * Wait before showing
-         * the stimulus.
-         */
-
-        setTimeout(
-            function () {
-
-                elements.previewStimulus.style.opacity =
-                    "1";
-
-
-                demoButton.textContent =
-                    "Stimulus Active";
-
-
-                /*
-                 * Hide stimulus after
-                 * configured duration.
-                 */
-
-                setTimeout(
-                    function () {
-
-                        elements.previewStimulus.style.opacity =
-                            "0";
-
-
-                        demoButton.textContent =
-                            "Trial Complete";
-
-
-                        setTimeout(
-                            function () {
-
-                                elements.previewStimulus.style.opacity =
-                                    "1";
-
-                                demoButton.disabled =
-                                    false;
-
-                                demoButton.textContent =
-                                    "Run Trial";
-
-                            },
-                            300
-                        );
-
-                    },
-                    trial.duration || 500
+                })
+                .eq(
+                    "id",
+                    currentExperimentId
                 );
 
-            },
-            trial.delay || 1000
+
+            if (error) {
+                throw error;
+            }
+
+        }
+
+
+        /* ---------------------------------------------
+           LOAD EXISTING DATABASE TRIALS
+        --------------------------------------------- */
+
+        const {
+            data: existingTrials,
+            error: existingError
+        } = await supabaseClient
+            .from("trials")
+            .select("id")
+            .eq(
+                "experiment_id",
+                currentExperimentId
+            );
+
+
+        if (existingError) {
+            throw existingError;
+        }
+
+
+        /*
+         * Delete old trials.
+         *
+         * We recreate them so the trial order and branching
+         * stay simple and predictable.
+         */
+
+        if (existingTrials &&
+            existingTrials.length > 0) {
+
+            const {
+                error
+            } = await supabaseClient
+                .from("trials")
+                .delete()
+                .eq(
+                    "experiment_id",
+                    currentExperimentId
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+        }
+
+
+        /* ---------------------------------------------
+           INSERT TRIALS
+        --------------------------------------------- */
+
+        const trialRows =
+            trials.map((trial, index) => {
+
+                return {
+
+                    experiment_id:
+                        currentExperimentId,
+
+                    trial_order:
+                        index + 1,
+
+                    name:
+                        trial.name,
+
+                    trial_type:
+                        trial.type,
+
+                    stimulus_type:
+                        "text",
+
+                    stimulus:
+                        trial.stimulus,
+
+                    description:
+                        trial.description,
+
+                    delay_ms:
+                        Number(trial.delay) || 0,
+
+                    duration_ms:
+                        Number(trial.duration) || 0,
+
+                    response_method:
+                        trial.responseMethod,
+
+                    correct_key:
+                        trial.correctKey || null,
+
+                    /*
+                     * Branches are temporarily null.
+                     * We set them after database IDs exist.
+                     */
+
+                    correct_next:
+                        null,
+
+                    incorrect_next:
+                        null
+
+                };
+
+            });
+
+
+        const {
+            data: insertedTrials,
+            error: insertError
+        } = await supabaseClient
+            .from("trials")
+            .insert(trialRows)
+            .select();
+
+
+        if (insertError) {
+            throw insertError;
+        }
+
+
+        /*
+         * Map local trial IDs → database trial IDs.
+         *
+         * Both arrays use the same order.
+         */
+
+        const idMap = new Map();
+
+
+        trials.forEach(
+            (localTrial, index) => {
+
+                idMap.set(
+                    localTrial.id,
+                    insertedTrials[index].id
+                );
+
+            }
         );
+
+
+        /* ---------------------------------------------
+           UPDATE BRANCHING
+        --------------------------------------------- */
+
+        for (
+            let i = 0;
+            i < trials.length;
+            i++
+        ) {
+
+            const localTrial =
+                trials[i];
+
+            const databaseTrial =
+                insertedTrials[i];
+
+
+            const correctNext =
+                localTrial.correctNext
+                    ? idMap.get(
+                        localTrial.correctNext
+                    ) || null
+                    : null;
+
+
+            const incorrectNext =
+                localTrial.incorrectNext
+                    ? idMap.get(
+                        localTrial.incorrectNext
+                    ) || null
+                    : null;
+
+
+            const {
+                error
+            } = await supabaseClient
+                .from("trials")
+                .update({
+
+                    correct_next:
+                        correctNext,
+
+                    incorrect_next:
+                        incorrectNext
+
+                })
+                .eq(
+                    "id",
+                    databaseTrial.id
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+        }
+
+
+        /*
+         * Replace temporary IDs with database IDs.
+         */
+
+        trials =
+            insertedTrials.map(
+                (dbTrial, index) => {
+
+                    return {
+
+                        ...trials[index],
+
+                        id:
+                            dbTrial.id
+
+                    };
+
+                }
+            );
+
+
+        renderTrials();
+
+
+        showMessage(
+            "Experiment saved successfully!"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Save experiment error:",
+            error
+        );
+
+
+        showMessage(
+            error.message ||
+            "Could not save experiment.",
+            true
+        );
+
+    } finally {
+
+        saving = false;
+
+        saveBtn.disabled = false;
+
+        saveBtn.textContent =
+            "Save Experiment";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   PREVIEW
+--------------------------------------------------------- */
+
+function previewExperiment() {
+
+    const previewData = {
+
+        id:
+            experimentId,
+
+        name:
+            experimentName.value.trim(),
+
+        description:
+            experimentDescription.value.trim(),
+
+        randomizeTrials:
+            randomizeTrials.checked,
+
+        randomizeStimuli:
+            randomizeStimuli.checked,
+
+        trials:
+            trials
+
+    };
+
+
+    /*
+     * Temporary localStorage is used ONLY for preview.
+     *
+     * The real saved experiment is in Supabase.
+     */
+
+    localStorage.setItem(
+        "cognilabPreviewExperiment",
+        JSON.stringify(previewData)
+    );
+
+
+    window.open(
+        "experiment.html?preview=true",
+        "_blank"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   MESSAGE
+--------------------------------------------------------- */
+
+function showMessage(
+    message,
+    isError = false
+) {
+
+    builderMessage.textContent =
+        message;
+
+    builderMessage.className =
+        "builder-message" +
+        (isError
+            ? " error"
+            : " success");
+
+
+    if (!message) {
+        builderMessage.className =
+            "builder-message";
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   ESCAPE HTML
+--------------------------------------------------------- */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value == null
+            ? ""
+            : String(value);
+
+    return div.innerHTML;
+}
+
+
+/* ---------------------------------------------------------
+   ESCAPE ATTRIBUTE
+--------------------------------------------------------- */
+
+function escapeAttribute(value) {
+
+    return escapeHTML(value)
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON EVENTS
+--------------------------------------------------------- */
+
+addTrialBtn.addEventListener(
+    "click",
+    addTrial
+);
+
+
+addFirstTrialBtn.addEventListener(
+    "click",
+    addTrial
+);
+
+
+saveBtn.addEventListener(
+    "click",
+    saveExperiment
+);
+
+
+previewBtn.addEventListener(
+    "click",
+    previewExperiment
+);
+
+
+logoutBtn.addEventListener(
+    "click",
+    async function() {
+
+        await logout();
+
+        window.location.href =
+            "login.html";
 
     }
 );
 
 
-/* =========================================================
-   RANDOMIZATION CHECKBOX INITIALIZATION
-========================================================= */
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
 
-elements.randomizeTrials.checked =
-    Boolean(
-        experiment.randomizeTrials
-    );
-
-
-elements.randomizeStimulus.checked =
-    Boolean(
-        experiment.randomizeStimulus
-    );
-
-
-/* =========================================================
-   INITIAL RENDER
-========================================================= */
-
-renderTrialList();
-
-loadSelectedTrial();
-
-saveExperiment();
+initializeBuilder();

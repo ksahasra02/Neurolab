@@ -1,720 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Experiment Builder | CogniLab
-    </title>
+    <title>CogniLab - Experiment Builder</title>
 
-    <link
-        rel="stylesheet"
-        href="builder.css"
-    >
-
+    <link rel="stylesheet" href="builder.css">
 </head>
-
 
 <body>
 
+<div class="builder-layout">
 
     <!-- =========================
-         TOP HEADER
-    ========================== -->
+         SIDEBAR
+         ========================= -->
 
-    <header class="builder-header">
+    <aside class="sidebar">
 
-        <div class="header-left">
-
-            <a
-                href="dashboard.html"
-                class="back-button"
-            >
-                ←
-            </a>
-
-
-            <div class="brand">
-                🧠 CogniLab
-            </div>
-
-
-            <div class="header-divider"></div>
-
-
-            <span class="page-title">
-                Experiment Builder
-            </span>
-
+        <div class="logo">
+            CogniLab
         </div>
 
+        <nav class="nav">
 
-        <div class="header-right">
-
-            <span
-                id="saveStatus"
-                class="save-status"
-            >
-                Saved
-            </span>
-
-
-            <a
-                href="experiment.html"
-                class="preview-button"
-            >
-                Preview
+            <a href="dashboard.html">
+                Dashboard
             </a>
 
+            <a href="builder.html" class="active">
+                Builder
+            </a>
 
-            <a
-                href="publish.html"
-                class="publish-button"
-            >
+            <a href="results.html">
+                Results
+            </a>
+
+            <a href="publish.html">
                 Publish
             </a>
 
-        </div>
+        </nav>
 
-    </header>
+        <button
+            id="logoutBtn"
+            class="btn btn-secondary logout-button">
+            Logout
+        </button>
 
+    </aside>
 
 
     <!-- =========================
-         BUILDER LAYOUT
-    ========================== -->
+         MAIN CONTENT
+         ========================= -->
 
-    <main class="builder-layout">
+    <main class="main-content">
 
+        <!-- HEADER -->
 
-        <!-- =========================
-             LEFT: TRIAL SIDEBAR
-        ========================== -->
+        <header class="builder-header">
 
-        <aside class="trial-sidebar">
+            <div class="header-left">
 
-
-            <!-- Experiment information -->
-
-            <div class="experiment-info">
-
-                <span class="section-label">
-                    EXPERIMENT
-                </span>
-
+                <div class="eyebrow">
+                    Experiment Builder
+                </div>
 
                 <h1>
-                    Reaction Time Study
+                    Build your experiment
                 </h1>
 
-
                 <p>
-                    Measure participant reaction time
-                    to visual stimuli.
+                    Create trials and configure how participants interact with your experiment.
                 </p>
 
             </div>
 
 
-
-            <!-- Trial header -->
-
-            <div class="trial-header">
-
-                <div>
-
-                    <span class="section-label">
-                        TRIALS
-                    </span>
-
-
-                    <span
-                        id="trialCount"
-                        class="trial-count"
-                    >
-                        0
-                    </span>
-
-                </div>
-
+            <div class="header-actions">
 
                 <button
-                    id="addTrialButton"
-                    class="add-trial-button"
-                    type="button"
-                >
-                    + Add Trial
+                    id="previewBtn"
+                    class="btn btn-secondary">
+                    Preview
+                </button>
+
+                <button
+                    id="saveBtn"
+                    class="btn btn-primary">
+                    Save Experiment
                 </button>
 
             </div>
 
+        </header>
 
 
-            <!-- Trial list -->
+        <!-- PAGE CONTENT -->
 
-            <div
-                id="trialList"
-                class="trial-list"
-            >
-            </div>
+        <div class="builder-content">
 
 
+            <!-- =========================
+                 EXPERIMENT INFORMATION
+                 ========================= -->
 
-            <!-- Randomization -->
+            <section class="builder-section">
 
-            <div class="sidebar-footer">
-
-                <div class="randomization-box">
-
-                    <span class="small-label">
-                        RANDOMIZATION
-                    </span>
-
-
-                    <label class="checkbox-row">
-
-                        <input
-                            type="checkbox"
-                            id="randomizeTrials"
-                        >
-
-                        Randomize trial order
-
-                    </label>
-
-
-                    <label class="checkbox-row">
-
-                        <input
-                            type="checkbox"
-                            id="randomizeStimulus"
-                        >
-
-                        Randomize stimulus
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </aside>
-
-
-
-        <!-- =========================
-             CENTER: PREVIEW
-        ========================== -->
-
-        <section class="preview-area">
-
-
-            <!-- Preview heading -->
-
-            <div class="preview-top">
-
-                <div>
-
-                    <span class="section-label">
-                        PARTICIPANT PREVIEW
-                    </span>
-
+                <div class="section-header">
 
                     <h2>
-                        Live Experiment Preview
+                        Experiment Information
                     </h2>
 
-                </div>
-
-
-                <span class="preview-badge">
-                    LIVE
-                </span>
-
-            </div>
-
-
-
-            <!-- Participant window -->
-
-            <div class="participant-window">
-
-
-                <!-- Participant header -->
-
-                <div class="participant-header">
-
-                    <span>
-                        CogniLab
-                    </span>
-
-
-                    <span id="previewProgress">
-                        Trial 01
-                    </span>
-
-                </div>
-
-
-
-                <!-- Participant content -->
-
-                <div class="participant-content">
-
-                    <span class="preview-label">
-                        REACTION TIME STUDY
-                    </span>
-
-
-                    <h1 id="previewTitle">
-                        Trial
-                    </h1>
-
-
-                    <p id="previewDescription">
+                    <p>
+                        Basic information about your study.
                     </p>
 
+                </div>
 
-                    <div
-                        id="builderStimulus"
-                        class="preview-stimulus circle"
-                    >
+
+                <div class="card form-card">
+
+                    <div class="form-group">
+
+                        <label for="experimentName">
+                            Experiment Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="experimentName"
+                            placeholder="e.g. Visual Reaction Time Study">
+
                     </div>
 
 
-                    <div class="preview-key">
+                    <div class="form-group">
 
-                        Press
+                        <label for="experimentDescription">
+                            Description
+                        </label>
 
-                        <strong id="previewKey">
-                            SPACE
-                        </strong>
+                        <textarea
+                            id="experimentDescription"
+                            placeholder="Brief description of the experiment"></textarea>
 
                     </div>
 
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 EXPERIMENT SETTINGS
+                 ========================= -->
+
+            <section class="builder-section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Experiment Settings
+                    </h2>
+
+                    <p>
+                        Configure how trials are presented.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-grid">
+
+
+                    <div class="setting-option">
+
+                        <input
+                            type="checkbox"
+                            id="randomizeTrials">
+
+                        <label for="randomizeTrials">
+
+                            <span class="setting-title">
+                                Randomize trials
+                            </span>
+
+                            <span class="setting-description">
+                                Present trials in a random order.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-option">
+
+                        <input
+                            type="checkbox"
+                            id="randomizeStimuli">
+
+                        <label for="randomizeStimuli">
+
+                            <span class="setting-title">
+                                Randomize stimuli
+                            </span>
+
+                            <span class="setting-description">
+                                Randomize stimulus presentation.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TRIALS
+                 ========================= -->
+
+            <section class="builder-section trials-section">
+
+                <div class="trials-header">
+
+                    <div>
+
+                        <h2>
+                            Trials
+                        </h2>
+
+                        <p>
+                            Define what participants will see and how they respond.
+                        </p>
+
+                    </div>
 
                     <button
-                        id="demoButton"
-                        class="demo-button"
-                        type="button"
-                    >
-                        Run Trial
+                        id="addTrialBtn"
+                        class="btn btn-primary">
+                        + Add Trial
                     </button>
 
                 </div>
 
 
+                <!-- TRIAL LIST -->
 
-                <!-- Participant footer -->
-
-                <div class="participant-footer">
-
-                    <span>
-                        Responses are recorded anonymously.
-                    </span>
+                <div
+                    id="trialList"
+                    class="trial-list">
+                </div>
 
 
-                    <span>
-                        CogniLab Research Platform
-                    </span>
+                <!-- EMPTY STATE -->
+
+                <div
+                    id="noTrials"
+                    class="empty-state">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        No trials yet
+                    </h3>
+
+                    <p>
+                        Add your first trial to start building the experiment.
+                    </p>
+
+                    <button
+                        id="addFirstTrialBtn"
+                        class="btn btn-primary">
+                        Add First Trial
+                    </button>
 
                 </div>
 
-            </div>
-
+            </section>
 
 
             <!-- =========================
-                 TIMELINE
-            ========================== -->
+                 ACTIONS
+                 ========================= -->
 
-            <div class="timeline">
-
-
-                <div class="timeline-item">
-
-                    <span
-                        class="timeline-dot active"
-                    >
-                    </span>
-
-
-                    <div>
-
-                        <strong>
-                            Trial Start
-                        </strong>
-
-                        <span>
-                            Participant begins trial
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="timeline-line"></div>
-
-
-                <div class="timeline-item">
-
-                    <span class="timeline-dot">
-                    </span>
-
-
-                    <div>
-
-                        <strong>
-                            Stimulus
-                        </strong>
-
-                        <span id="timelineStimulus">
-                            Visual stimulus
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="timeline-line"></div>
-
-
-                <div class="timeline-item">
-
-                    <span class="timeline-dot">
-                    </span>
-
-
-                    <div>
-
-                        <strong>
-                            Response
-                        </strong>
-
-                        <span id="timelineResponse">
-                            Participant response
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             RIGHT: SETTINGS
-        ========================== -->
-
-        <aside class="settings-panel">
-
-
-            <!-- Settings header -->
-
-            <div class="settings-header">
-
-                <div>
-
-                    <span class="section-label">
-                        SETTINGS
-                    </span>
-
-
-                    <h2>
-                        Trial Settings
-                    </h2>
-
-
-                    <span id="settingsTrialNumber">
-                        01
-                    </span>
-
-                </div>
-
+            <div class="builder-actions">
 
                 <button
-                    id="deleteTrialButton"
-                    class="delete-trial-button"
-                    type="button"
-                >
-                    Delete Trial
+                    id="previewBtnBottom"
+                    class="btn btn-secondary">
+                    Preview
+                </button>
+
+                <button
+                    id="saveBtnBottom"
+                    class="btn btn-primary">
+                    Save Experiment
                 </button>
 
             </div>
 
 
+            <!-- MESSAGE -->
 
-            <!-- =========================
-                 GENERAL
-            ========================== -->
-
-            <div class="settings-section">
-
-                <h3>
-                    General
-                </h3>
-
-
-                <label>
-
-                    Trial Name
-
-                    <input
-                        id="trialName"
-                        type="text"
-                        placeholder="Enter trial name"
-                    >
-
-                </label>
-
-
-                <label>
-
-                    Trial Type
-
-                    <select id="trialType">
-
-                        <option value="reaction">
-                            Reaction Time
-                        </option>
-
-                        <option value="choice">
-                            Choice Response
-                        </option>
-
-                        <option value="instruction">
-                            Instruction
-                        </option>
-
-                    </select>
-
-                </label>
-
+            <div
+                id="builderMessage"
+                class="builder-message">
             </div>
 
 
-
-            <!-- =========================
-                 STIMULUS
-            ========================== -->
-
-            <div class="settings-section">
-
-                <h3>
-                    Stimulus
-                </h3>
-
-
-                <label>
-
-                    Stimulus Type
-
-                    <select id="stimulusType">
-
-                        <option value="circle">
-                            Circle
-                        </option>
-
-                        <option value="square">
-                            Square
-                        </option>
-
-                    </select>
-
-                </label>
-
-
-                <label>
-
-                    Description
-
-                    <textarea
-                        id="stimulusDescription"
-                        rows="3"
-                        placeholder="Describe what the participant should do..."
-                    ></textarea>
-
-                </label>
-
-            </div>
-
-
-
-            <!-- =========================
-                 TIMING
-            ========================== -->
-
-            <div class="settings-section">
-
-                <h3>
-                    Timing
-                </h3>
-
-
-                <label>
-
-                    Delay Before Stimulus
-
-                    <span class="unit">
-                        ms
-                    </span>
-
-
-                    <input
-                        id="delay"
-                        type="number"
-                        min="0"
-                        step="100"
-                    >
-
-                </label>
-
-
-                <label>
-
-                    Stimulus Duration
-
-                    <span class="unit">
-                        ms
-                    </span>
-
-
-                    <input
-                        id="duration"
-                        type="number"
-                        min="0"
-                        step="100"
-                    >
-
-                </label>
-
-            </div>
-
-
-
-            <!-- =========================
-                 RESPONSE
-            ========================== -->
-
-            <div class="settings-section">
-
-                <h3>
-                    Response
-                </h3>
-
-
-                <label>
-
-                    Response Method
-
-                    <select id="responseMethod">
-
-                        <option value="keyboard">
-                            Keyboard
-                        </option>
-
-                        <option value="mouse">
-                            Mouse Click
-                        </option>
-
-                    </select>
-
-                </label>
-
-
-                <label>
-
-                    Correct Key
-
-                    <select id="allowedKey">
-
-                        <option value="Space">
-                            SPACE
-                        </option>
-
-                        <option value="Enter">
-                            ENTER
-                        </option>
-
-                        <option value="ArrowLeft">
-                            LEFT ARROW
-                        </option>
-
-                        <option value="ArrowRight">
-                            RIGHT ARROW
-                        </option>
-
-                    </select>
-
-                </label>
-
-            </div>
-
-
-
-            <!-- =========================
-                 CONDITIONAL BRANCHING
-            ========================== -->
-
-            <div class="settings-section">
-
-                <h3>
-                    Conditional Branching
-                </h3>
-
-
-                <p class="settings-help">
-                    After this trial, choose where the
-                    participant goes for a correct or
-                    incorrect response.
-                </p>
-
-
-                <label>
-
-                    After Correct
-
-                    <select id="correctNext">
-                    </select>
-
-                </label>
-
-
-                <label>
-
-                    After Incorrect
-
-                    <select id="incorrectNext">
-                    </select>
-
-                </label>
-
-            </div>
-
-        </aside>
+        </div>
 
     </main>
 
+</div>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+<!-- =========================
+     SUPABASE
+     ========================= -->
 
-    <script src="builder.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="backend/config.js"></script>
+
+<script src="backend/auth.js"></script>
+
+<script src="backend/experiments.js"></script>
+
+
+<!-- BUILDER JS -->
+
+<script src="builder.js"></script>
+
+
+<!-- =========================
+     EXTRA BUTTON HANDLERS
+     ========================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const previewBottom =
+        document.getElementById("previewBtnBottom");
+
+    const saveBottom =
+        document.getElementById("saveBtnBottom");
+
+    const previewTop =
+        document.getElementById("previewBtn");
+
+    const saveTop =
+        document.getElementById("saveBtn");
+
+
+    if (previewBottom && previewTop) {
+
+        previewBottom.addEventListener("click", function () {
+            previewTop.click();
+        });
+
+    }
+
+
+    if (saveBottom && saveTop) {
+
+        saveBottom.addEventListener("click", function () {
+            saveTop.click();
+        });
+
+    }
+
+});
+
+</script>
 
 </body>
-
 </html>
