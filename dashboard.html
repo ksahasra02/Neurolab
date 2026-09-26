@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | CogniLab</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <!-- Logo -->
+
+        <div class="logo">
+            <span>🧠</span>
+            <strong>CogniLab</strong>
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-item active">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◫</span>
+                My Experiments
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◈</span>
+                Results
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom sidebar -->
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+
+                <div class="avatar">
+                    R
+                </div>
+
+                <div>
+                    <strong>Researcher</strong>
+                    <span>researcher@example.com</span>
+                </div>
+
+            </div>
+
+            <a href="index.html" class="logout">
+                Log out
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="dashboard">
+
+        <!-- Top bar -->
+
+        <header class="topbar">
+
+            <div>
+                <p class="small-heading">
+                    RESEARCH WORKSPACE
+                </p>
+
+                <h1>
+                    Good morning, Researcher
+                </h1>
+
+                <p class="subtitle">
+                    Manage your experiments and research data.
+                </p>
+            </div>
+
+
+            <a href="builder.html" class="create-button">
+                + Create Experiment
+            </a>
+
+        </header>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats-grid">
+
+            <!-- Stat 1 -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Experiments</span>
+
+                    <div class="stat-icon">
+                        ◫
+                    </div>
+                </div>
+
+                <strong>12</strong>
+
+                <p>
+                    <span class="positive">+2</span>
+                    this month
+                </p>
+
+            </div>
+
+
+            <!-- Stat 2 -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Published</span>
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+                </div>
+
+                <strong>8</strong>
+
+                <p>
+                    <span class="positive">67%</span>
+                    of experiments
+                </p>
+
+            </div>
+
+
+            <!-- Stat 3 -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Participants</span>
+
+                    <div class="stat-icon">
+                        ◎
+                    </div>
+                </div>
+
+                <strong>1,284</strong>
+
+                <p>
+                    <span class="positive">+18%</span>
+                    this month
+                </p>
+
+            </div>
+
+
+            <!-- Stat 4 -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>Responses</span>
+
+                    <div class="stat-icon">
+                        ≋
+                    </div>
+                </div>
+
+                <strong>8,492</strong>
+
+                <p>
+                    <span class="positive">+24%</span>
+                    this month
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CONTENT GRID ================= -->
+
+        <section class="content-grid">
+
+
+            <!-- ================= RECENT EXPERIMENTS ================= -->
+
+            <div class="experiments-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>
+                            Recent Experiments
+                        </h2>
+
+                        <p>
+                            Your latest research experiments
+                        </p>
+                    </div>
+
+                    <a href="#" class="view-all">
+                        View all →
+                    </a>
+
+                </div>
+
+
+                <!-- Experiment 1 -->
+
+                <div class="experiment-row">
+
+                    <div class="experiment-info">
+
+                        <div class="experiment-icon">
+                            RT
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Reaction Time Study
+                            </h3>
+
+                            <p>
+                                20 trials · Updated 2 hours ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="experiment-status published">
+                        Published
+                    </div>
+
+
+                    <div class="participant-count">
+                        342 participants
+                    </div>
+
+
+                    <button class="more-button">
+                        ⋮
+                    </button>
+
+                </div>
+
+
+                <!-- Experiment 2 -->
+
+                <div class="experiment-row">
+
+                    <div class="experiment-info">
+
+                        <div class="experiment-icon purple">
+                            VS
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Visual Search Experiment
+                            </h3>
+
+                            <p>
+                                35 trials · Updated yesterday
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="experiment-status published">
+                        Published
+                    </div>
+
+
+                    <div class="participant-count">
+                        218 participants
+                    </div>
+
+
+                    <button class="more-button">
+                        ⋮
+                    </button>
+
+                </div>
+
+
+                <!-- Experiment 3 -->
+
+                <div class="experiment-row">
+
+                    <div class="experiment-info">
+
+                        <div class="experiment-icon orange">
+                            ST
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Stroop Task
+                            </h3>
+
+                            <p>
+                                50 trials · Updated 3 days ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="experiment-status draft">
+                        Draft
+                    </div>
+
+
+                    <div class="participant-count">
+                        —
+                    </div>
+
+
+                    <button class="more-button">
+                        ⋮
+                    </button>
+
+                </div>
+
+
+                <!-- Experiment 4 -->
+
+                <div class="experiment-row">
+
+                    <div class="experiment-info">
+
+                        <div class="experiment-icon green">
+                            WM
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Working Memory Test
+                            </h3>
+
+                            <p>
+                                25 trials · Updated 5 days ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="experiment-status published">
+                        Published
+                    </div>
+
+
+                    <div class="participant-count">
+                        156 participants
+                    </div>
+
+
+                    <button class="more-button">
+                        ⋮
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT PANEL ================= -->
+
+            <div class="right-panel">
+
+
+                <!-- Quick Start -->
+
+                <div class="quick-card">
+
+                    <p class="small-heading">
+                        QUICK START
+                    </p>
+
+                    <h2>
+                        Create a new experiment
+                    </h2>
+
+                    <p>
+                        Start with a blank experiment and
+                        configure your first trial.
+                    </p>
+
+                    <a href="builder.html" class="quick-button">
+                        Start Building →
+                    </a>
+
+                </div>
+
+
+                <!-- Activity -->
+
+                <div class="activity-card">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>
+                                Recent Activity
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-dot"></div>
+
+                        <div>
+
+                            <p>
+                                <strong>Reaction Time Study</strong>
+                                received 12 new responses.
+                            </p>
+
+                            <span>
+                                18 minutes ago
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-dot purple-dot"></div>
+
+                        <div>
+
+                            <p>
+                                <strong>Visual Search Experiment</strong>
+                                was published.
+                            </p>
+
+                            <span>
+                                Yesterday
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-dot orange-dot"></div>
+
+                        <div>
+
+                            <p>
+                                <strong>Stroop Task</strong>
+                                was edited.
+                            </p>
+
+                            <span>
+                                3 days ago
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

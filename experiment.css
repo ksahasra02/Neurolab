@@ -1,0 +1,529 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background: #050914;
+
+    color: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.experiment-header {
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    background: #080d1b;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/* Brand */
+
+.experiment-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #dfe4f2;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.brand-icon {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.progress-area > span {
+    color: #69738c;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+.progress-bar {
+    width: 150px;
+
+    height: 4px;
+
+    background: #20283b;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 20%;
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #4169e1,
+        #7257e8
+    );
+
+    border-radius: 10px;
+}
+
+
+/* Exit */
+
+.exit-button {
+    padding: 7px 13px;
+
+    background: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 6px;
+
+    color: #69738c;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.exit-button:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* =========================================================
+   MAIN EXPERIMENT AREA
+   ========================================================= */
+
+.experiment-area {
+    height: calc(100vh - 105px);
+
+    position: relative;
+}
+
+
+/* =========================================================
+   COMMON SCREEN
+   ========================================================= */
+
+.experiment-screen {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.experiment-screen.active {
+    display: flex;
+}
+
+/*
+   For the visual prototype, only the instruction screen
+   is visible initially.
+*/
+
+.instruction-screen {
+    display: flex;
+}
+
+
+/* =========================================================
+   INSTRUCTION SCREEN
+   ========================================================= */
+
+.screen-content {
+    max-width: 650px;
+
+    padding: 30px;
+}
+
+.experiment-label {
+    color: #6685ff;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+.screen-content h1 {
+    font-size: 52px;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 20px;
+}
+
+.screen-content > p:not(.experiment-label) {
+    color: #8f99b0;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+.screen-content strong {
+    color: #ffffff;
+}
+
+
+/* Keyboard */
+
+.keyboard-key {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 130px;
+
+    padding: 13px 25px;
+
+    margin-bottom: 30px;
+
+    background: #11182b;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-bottom: 3px solid #313a52;
+
+    border-radius: 8px;
+
+    color: #dbe0ed;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* Begin */
+
+.begin-button {
+    display: block;
+
+    margin: auto;
+
+    padding: 13px 23px;
+
+    background: linear-gradient(
+        135deg,
+        #4169e1,
+        #7257e8
+    );
+
+    border: none;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(65, 105, 225, 0.25);
+
+    transition: 0.3s ease;
+}
+
+.begin-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(65, 105, 225, 0.4);
+}
+
+
+/* =========================================================
+   FIXATION SCREEN
+   ========================================================= */
+
+.fixation {
+    font-size: 35px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   STIMULUS SCREEN
+   ========================================================= */
+
+.stimulus-screen {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(65, 105, 225, 0.04),
+            transparent 50%
+        );
+}
+
+.stimulus-circle {
+    width: 110px;
+
+    height: 110px;
+
+    border-radius: 50%;
+
+    background: #5e75ff;
+
+    box-shadow:
+        0 0 30px rgba(94, 117, 255, 0.8),
+        0 0 100px rgba(94, 117, 255, 0.3);
+}
+
+
+/* =========================================================
+   RESPONSE SCREEN
+   ========================================================= */
+
+.response-content {
+    text-align: center;
+}
+
+.response-label {
+    color: #45c982;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.response-content h1 {
+    font-size: 70px;
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+}
+
+.response-content h1 span {
+    color: #69738c;
+
+    font-size: 20px;
+
+    font-weight: normal;
+}
+
+.response-content > p:last-child {
+    color: #69738c;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   COMPLETION SCREEN
+   ========================================================= */
+
+.completion-content {
+    text-align: center;
+}
+
+.completion-icon {
+    width: 60px;
+
+    height: 60px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(69, 201, 130, 0.1);
+
+    border: 1px solid rgba(69, 201, 130, 0.3);
+
+    color: #45c982;
+
+    font-size: 25px;
+}
+
+.completion-content h1 {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.completion-content > p:last-child {
+    color: #7f89a2;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.experiment-footer {
+    height: 40px;
+
+    padding: 0 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #080d1b;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    color: #454f65;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .experiment-header {
+        padding: 0 15px;
+    }
+
+    .progress-area {
+        gap: 8px;
+    }
+
+    .progress-bar {
+        width: 80px;
+    }
+
+    .experiment-brand {
+        font-size: 12px;
+    }
+
+    .screen-content h1 {
+        font-size: 42px;
+    }
+
+    .screen-content > p:not(.experiment-label) {
+        font-size: 13px;
+    }
+
+    .experiment-footer {
+        padding: 0 15px;
+    }
+
+    .experiment-footer span:last-child {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .experiment-header {
+        height: 58px;
+    }
+
+    .experiment-area {
+        height: calc(100vh - 98px);
+    }
+
+    .progress-area > span {
+        display: none;
+    }
+
+    .screen-content h1 {
+        font-size: 36px;
+    }
+
+    .screen-content {
+        padding: 20px;
+    }
+
+    .stimulus-circle {
+        width: 85px;
+        height: 85px;
+    }
+
+    .response-content h1 {
+        font-size: 55px;
+    }
+
+    .completion-content h1 {
+        font-size: 36px;
+    }
+}

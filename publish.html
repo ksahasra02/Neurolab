@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Publish Experiment | CogniLab</title>
+
+    <link rel="stylesheet" href="publish.css">
+</head>
+
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <span class="logo-icon">🧠</span>
+
+            <span>CogniLab</span>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+
+                <span>▦</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="dashboard.html" class="nav-item">
+
+                <span>◫</span>
+
+                My Experiments
+
+            </a>
+
+
+            <a href="results.html" class="nav-item">
+
+                <span>◒</span>
+
+                Results
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <!-- USER -->
+
+        <div class="sidebar-bottom">
+
+            <div class="user-card">
+
+                <div class="user-avatar">
+                    R
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong>Researcher</strong>
+
+                    <span>Research Account</span>
+
+                </div>
+
+            </div>
+
+
+            <a href="login.html" class="logout">
+
+                ↪ Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <a href="builder.html" class="back-link">
+
+                    ← Back to Builder
+
+                </a>
+
+
+                <div class="page-title">
+
+                    <h1>Publish Experiment</h1>
+
+                    <p>
+                        Make your experiment available to participants.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="published-badge">
+
+                <span>●</span>
+
+                Published
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             SUCCESS BANNER
+             ========================= -->
+
+        <section class="success-banner">
+
+            <div class="success-icon">
+
+                ✓
+
+            </div>
+
+
+            <div class="success-content">
+
+                <h2>
+                    Your experiment is ready!
+                </h2>
+
+                <p>
+                    Reaction Time Study has been published successfully.
+                    Participants can now access the experiment using the link below.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             CONTENT GRID
+             ========================= -->
+
+        <section class="publish-grid">
+
+
+            <!-- =========================
+                 LEFT COLUMN
+                 ========================= -->
+
+            <div class="left-column">
+
+
+                <!-- PARTICIPANT LINK -->
+
+                <div class="card link-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Participant Link</h2>
+
+                            <p>
+                                Share this link with your participants.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="link-box">
+
+                        <span class="link-text">
+                            cogni-lab.app/experiment/RT-2026-04
+                        </span>
+
+
+                        <button class="copy-button">
+
+                            ⧉ Copy Link
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="link-note">
+
+                        <span>🔒</span>
+
+                        Responses are collected anonymously.
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EXPERIMENT INFORMATION -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Experiment Details</h2>
+
+                            <p>
+                                Information participants will see.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Experiment
+                            </span>
+
+                            <strong>
+                                Reaction Time Study
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Trials
+                            </span>
+
+                            <strong>
+                                20
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Estimated Duration
+                            </span>
+
+                            <strong>
+                                3–5 minutes
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Response Method
+                            </span>
+
+                            <strong>
+                                Keyboard
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Status
+                            </span>
+
+                            <strong class="active-text">
+                                Active
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Published
+                            </span>
+
+                            <strong>
+                                Today
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PARTICIPANT SETTINGS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Participant Settings</h2>
+
+                            <p>
+                                Current settings for this experiment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Anonymous Responses
+                            </strong>
+
+                            <span>
+                                No personally identifiable information is required.
+                            </span>
+
+                        </div>
+
+
+                        <div class="toggle active">
+
+                            <div class="toggle-circle"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Multiple Attempts
+                            </strong>
+
+                            <span>
+                                Participants can complete the experiment only once.
+                            </span>
+
+                        </div>
+
+
+                        <div class="toggle">
+
+                            <div class="toggle-circle"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <strong>
+                                Collect Reaction Time
+                            </strong>
+
+                            <span>
+                                Record response timing for each trial.
+                            </span>
+
+                        </div>
+
+
+                        <div class="toggle active">
+
+                            <div class="toggle-circle"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 RIGHT COLUMN
+                 ========================= -->
+
+            <div class="right-column">
+
+
+                <!-- QR CODE -->
+
+                <div class="card qr-card">
+
+                    <div class="card-header center-header">
+
+                        <h2>Scan to Participate</h2>
+
+                        <p>
+                            Participants can scan this QR code.
+                        </p>
+
+                    </div>
+
+
+                    <div class="qr-container">
+
+                        <div class="qr-code">
+
+                            <div class="qr-pattern">
+
+                                <div class="qr-square square-one"></div>
+
+                                <div class="qr-square square-two"></div>
+
+                                <div class="qr-square square-three"></div>
+
+                                <div class="qr-dots">
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="qr-caption">
+                        RT-2026-04
+                    </p>
+
+                </div>
+
+
+
+                <!-- OPEN EXPERIMENT -->
+
+                <div class="card open-card">
+
+                    <div class="open-icon">
+                        ↗
+                    </div>
+
+
+                    <h2>
+                        Test the experiment
+                    </h2>
+
+
+                    <p>
+                        Open the participant view to make sure everything works correctly.
+                    </p>
+
+
+                    <a href="experiment.html" class="open-button">
+
+                        Open Participant View
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- SHARE -->
+
+                <div class="card share-card">
+
+                    <h2>
+                        Share Experiment
+                    </h2>
+
+
+                    <p>
+                        Send the experiment to participants using your preferred method.
+                    </p>
+
+
+                    <div class="share-buttons">
+
+                        <button>
+                            ✉ Email
+                        </button>
+
+                        <button>
+                            ⧉ Copy
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FOOTER ACTIONS
+             ========================= -->
+
+        <section class="bottom-actions">
+
+            <a href="dashboard.html" class="secondary-action">
+
+                ← Back to Dashboard
+
+            </a>
+
+
+            <a href="experiment.html" class="primary-action">
+
+                Open Experiment
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- DISCLAIMER -->
+
+        <div class="data-note">
+
+            <span>ⓘ</span>
+
+            <p>
+                This prototype uses browser-based timing. Actual timing measurements
+                may vary depending on the participant's device, browser, display and input hardware.
+            </p>
+
+        </div>
+
+
+    </main>
+
+</body>
+
+</html>
